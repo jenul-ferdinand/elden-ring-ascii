@@ -1,0 +1,72 @@
+@startuml
+
+'Properties & Settings
+skinparam linetype ortho
+set namespaceSeparator none
+
+'Engine
+package edu.monash.fit2099.engine {
+    'Actor
+    abstract class Actor <<abstract>>
+
+    'WeaponItem
+    abstract class WeaponItem <<abstract>>
+
+}
+
+'Game
+package game {
+    'Weapons
+    class Uchigatana
+    class GreatKnife
+    class Club
+    class Grossmesser
+
+    'Enemies
+    class HeavySkeletalSwordsman
+    class LoneWolf
+    class GiantCrab
+
+    'Traders
+    class MerchantKale
+
+    'Rune
+    class Rune
+
+    'Driver Class
+    class Application
+
+    'MerchantKale is a child of Actor
+    MerchantKale -[#blue]-|> Actor
+    'Enemies are children of the Actors class
+    HeavySkeletalSwordsman -[#blue]-|> Actor
+    LoneWolf -[#blue]-|> Actor
+    GiantCrab -[#blue]-|> Actor
+
+    'MerchantKale buys and sells weapons
+    MerchantKale -[#red]-> "0..*" GreatKnife : <color:red>transacts
+    MerchantKale -[#red]-> "0..*" Uchigatana : <color:red>transacts
+    MerchantKale -[#red]-> "0..*" Club : <color:red>transacts
+    MerchantKale -[#red]-> "0..*" Grossmesser : <color:red>transacts
+
+    'Application creates MerchantCale
+    Application .u.> MerchantKale
+
+    'Different weapons who have a parent, WeaponItem
+    Club -[#green]-|> WeaponItem
+    GreatKnife -[#green]-|> WeaponItem
+    Uchigatana -[#green]-|> WeaponItem
+    Grossmesser -[#green]-|> WeaponItem
+
+    'Application creates Enemies
+    Application ...> HeavySkeletalSwordsman
+    Application ...> LoneWolf
+    Application ...> GiantCrab
+
+    'Association relationship between enemies and Rune
+    HeavySkeletalSwordsman --> Rune
+    LoneWolf --> Rune
+    GiantCrab --> Rune
+}
+
+@enduml
