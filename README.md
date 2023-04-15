@@ -1,8 +1,8 @@
 # FIT2099 Assignment (Semester 1, 2023)
 # Elden Ring
 
-## XX_LabYYTeamZZ
-Team members: Ruilin Lu, Da Gao, Jenul Ferdinand
+## CL_Lab18Team01
+Team members: Ruilin Lu, Jenul Ferdinand
 
 ## Design Rationale
 
