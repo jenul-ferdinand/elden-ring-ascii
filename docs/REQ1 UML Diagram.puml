@@ -1,0 +1,8 @@
+@startuml
+
+'Properties & Settings
+skinparam linetype ortho
+set namespaceSeparator none
+
+
+@enduml
