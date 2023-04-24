@@ -4,5 +4,80 @@
 skinparam linetype ortho
 set namespaceSeparator none
 
+package engine {
+    abstract class Actor <<abstract>>
+    abstract class Ground <<abstract>>
+    abstract class WeaponItem <<abstract>>
+    abstract class Action <<abstract>>
+}
+
+package game {
+    ' Behaviours
+    interface IBehaviour
+    class WanderBehaviour
+    class FollowBehaviour
+
+    ' Enemies
+    abstract class Enemy <<abstract>>
+    interface IEnemy <<interface>>
+    class HeavySkeletalSwordsman
+    class LoneWolf
+    class GiantCrab
+
+    ' Weapons
+    class Rune
+    class Uchigatana
+    class GreatKnife
+    class Club
+    class Grossmesser
+
+    ' Actions
+    class DespawnAction
+    class DeathAction
+    class AttackAction
+
+    ' Environments
+    abstract class Environment
+    interface IEnvironment
+    class Graveyard
+    class GustOfWind
+    class PuddleOfWater
+
+    ' Utils
+    class Random
+
+    ' Driver
+    class Application
+}
+
+' ===== Associations ---> =====
+
+
+' ===== Dependencies ...> =====
+
+
+' ===== Generalisations ---|> =====
+' Enemies
+Enemy --up-|> Actor
+HeavySkeletalSwordsman --up-|> Enemy
+LoneWolf --up-|> Enemy
+GiantCrab --up-|> Enemy
+
+' Environments
+Environment ---|> Ground
+Graveyard --up-|> Environment
+GustOfWind --up-|> Environment
+PuddleOfWater --up-|> Environment
+
+' ===== Realisations ...|> =====
+' IEnemy is realised by Enemy
+Enemy ...|> IEnemy
+
+WanderBehaviour ...|> IBehaviour
+FollowBehaviour ...|> IBehaviour
+
+' IEnvironment is realised by Environment
+Environment ...|> IEnvironment
+
 
 @enduml

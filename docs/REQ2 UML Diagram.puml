@@ -24,11 +24,8 @@ package game {
     ' Things that can be picked up
     abstract class Consumables <<abstract>> #lime
     abstract class Equippable <<abstract>> #lime
-    class Rune  #lime
-    class Uchigatana #lime
-    class GreatKnife #lime
-    class Club
-    class Grossmesser #lime
+
+
     ' Driver Class
     class Application
 
