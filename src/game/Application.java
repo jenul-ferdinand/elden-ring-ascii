@@ -14,6 +14,7 @@ import game.environments.Dirt;
 import game.environments.Floor;
 import game.environments.Wall;
 import game.items.Club;
+import game.items.Rune;
 import game.traders.MerchantKale;
 import game.utils.FancyMessage;
 
@@ -65,14 +66,14 @@ public class Application {
 		world.addGameMap(gameMap);
 
 		// Display the ELDEN RING title card
-		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
-			new Display().println(line);
-			try {
-				Thread.sleep(200);
-			} catch (Exception exception) {
-				exception.printStackTrace();
-			}
-		}
+//		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
+//			new Display().println(line);
+//			try {
+//				Thread.sleep(200);
+//			} catch (Exception exception) {
+//				exception.printStackTrace();
+//			}
+//		}
 
 		// Create a Lone Wolf enemy
 		gameMap.at(23, 17).addActor(new LoneWolf());
@@ -80,16 +81,15 @@ public class Application {
 		// Create Merchant Kale
 		gameMap.at(38, 9).addActor(new MerchantKale());
 
-
+		// Create a Rune for testing
+		gameMap.at(38, 15).addItem(new Rune(100));
+		gameMap.at(38, 16).addItem(new Rune(100));
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		// Create a Player
 		Player player = new Player("Tarnished", '@', 300);
 		// Add the Player to the World
 		world.addPlayer(player, gameMap.at(36, 10));
-
-		// Add item test
-		PurchaseAction purchase = new PurchaseAction(player, new Club());
 
 		// Start the World game loop
 		world.run();

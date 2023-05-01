@@ -7,91 +7,103 @@ set namespaceSeparator none
 package engine {
     abstract class Actor <<abstract>>
     abstract class WeaponItem <<abstract>>
+    interface Action <<interface>>
 }
 
 package game {
 
     package enemies {
-        'Enemies
-        abstract class Enemy <<abstract>> #lime
-        interface IEnemy <<interface>> #lime
-        class HeavySkeletalSwordsman #lime
+        abstract class Enemy <<abstract>>
+        class HeavySkeletalSwordsman
         class LoneWolf
-        class GiantCrab #lime
+        class GiantCrab
     }
 
     package traders {
-        'Trader
-        abstract class Trader <<abstract>> #lime
-        interface ITrader <<interface>> #lime
-        class MerchantKale #lime
+        abstract class Trader <<abstract>>
+        class MerchantKale
+    }
+
+    package actions {
+        class PurchaseAction
     }
 
     package items {
-        ' Things that can be picked up
-        abstract class Consumables <<abstract>> #lime
-        abstract class Equippable <<abstract>> #lime
+        interface Consumables <<interface>>
 
         class Rune
         class Grossmesser
         class Club
-        class Uchigatana
-        class GreatKnife
     }
+
+    ' Player
+    class Player
 
     ' Driver Class
     class Application
 }
 
-    ' ===== Generalisations (Parent/Child) =====
 
-    ' Trader is generalised by MerchantKale
-    MerchantKale -[#orange]-|> Trader
 
-    ' Enemy is generalised by the enemies
+
+    ' ========== Generalisations (Parent/Child) ==========
+
+    MerchantKale --|> Trader
+
+    Trader --|> Actor
+
     HeavySkeletalSwordsman -[#blue]-|> Enemy
     LoneWolf -[#blue]-|> Enemy
     GiantCrab -[#blue]-|> Enemy
 
-    ' Different weapons who have a parent, WeaponItem
     Club -[#green]-|> WeaponItem
-    GreatKnife -[#green]-|> WeaponItem
-    Uchigatana -[#green]-|> WeaponItem
     Grossmesser -[#green]-|> WeaponItem
 
-    'Runes are Consumable
-    Rune -|> Consumables
+    PurchaseAction --|> Action
 
-    'WeaponItem is Equippable
-    WeaponItem -|> Equippable
 
-    ' ===== Realisations (Interfaces) =====
-    ' ITrader is realised by Trader
-    Trader ..|> ITrader
 
-    ' IEnemy is realised by Enemy
-    Enemy ..|> IEnemy
 
-    ' ===== Associations =====
+    ' ========== Realisations (Interfaces) ==========
+
+    ' Runes are consumable
+    Rune ..|> Consumables
+
+
+
+
+    ' ========== Associations ==========
+
     ' MerchantKale who trades weapons
-    MerchantKale "1" -[#red]-> "0..*" GreatKnife : <color:red>transacts
-    MerchantKale "1" -[#red]-> "0..*" Uchigatana : <color:red>transacts
-    MerchantKale "1" -[#red]-> "0..*" Club : <color:red>transacts
-    MerchantKale "1" -[#red]-> "0..*" Grossmesser : <color:red>transacts
+    MerchantKale "1" --> "0..*" Club : transacts
+    MerchantKale "1" --> "0..*" Grossmesser : buys
 
     ' Enemies dropping Runes
     HeavySkeletalSwordsman --> "1" Rune : drops
     LoneWolf --> "1" Rune : drops
     GiantCrab --> "1" Rune : drops
 
-    ' ===== Dependencies =====
+
+
+
+    ' ========== Dependencies ==========
+
     ' Application creates MerchantKale
-    Application ..> MerchantKale
+    Application .> MerchantKale
 
     ' Application creates Enemies
     Application ..> HeavySkeletalSwordsman
     Application ..> LoneWolf
     Application ..> GiantCrab
+
+    ' Rune adds to the Player's runes balance
+    Rune ..> Player
+
+    ' Player interacts with MerchantKale
+    Player ..> MerchantKale
+
+    ' MerchantKale creates a PurchaseAction
+    MerchantKale ..> PurchaseAction
 }
 
 @enduml

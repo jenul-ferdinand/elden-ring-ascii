@@ -19,6 +19,7 @@ import game.utils.Status;
  *
  */
 public class Player extends Actor implements Resettable {
+	private int runes = 0;
 
 	private final Menu menu = new Menu();
 
@@ -34,6 +35,11 @@ public class Player extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addWeaponToInventory(new Club());
 	}
+
+	public void setRunes(int amount) {
+		this.runes += amount;
+	}
+	public int getRunes() { return runes; }
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {

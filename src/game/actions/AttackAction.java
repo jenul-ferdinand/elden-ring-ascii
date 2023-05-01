@@ -15,7 +15,6 @@ import edu.monash.fit2099.engine.weapons.Weapon;
  *
  */
 public class AttackAction extends Action {
-
 	/**
 	 * The Actor that is to be attacked
 	 */

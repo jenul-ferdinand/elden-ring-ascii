@@ -30,7 +30,7 @@ public class PurchaseAction extends Action {
      * The method will add the item to the receiver's inventory
      * @param receiver The receiver of the item being sold
      * @param map The map the actor is on.
-     * @return String
+     * @return String This String will be printed as confirmation
      */
     @Override
     public String execute(Actor receiver, GameMap map) {
@@ -44,9 +44,9 @@ public class PurchaseAction extends Action {
     }
 
     /**
-     * This method will be what text is displayed for this action
+     * A String to be printed for the menu option
      * @param actor The actor performing the action.
-     * @return String The menu option
+     * @return String The menu option String
      */
     @Override
     public String menuDescription(Actor actor) {
