@@ -7,27 +7,19 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.utils.Status;
 import game.actions.AttackAction;
 import game.behaviour.Behaviour;
 import game.behaviour.WanderBehaviour;
+import game.utils.Status;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * BEHOLD, DOG!
- *
- * Created by:
- * @author Adrian Kristanto
- * Modified by:
- *
- */
-public class LoneWolf extends Enemy {
+public class HeavySkeletalSwordsman extends Enemy {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
-    public LoneWolf() {
-        super("Lone Wolf", 'h', 102,97,95, null);
+    public HeavySkeletalSwordsman() {
+        super("Heavy Skeletal Swordsman", 'q', 153,0,0, null);
         this.behaviours.put(999, new WanderBehaviour());
     }
 
@@ -73,6 +65,6 @@ public class LoneWolf extends Enemy {
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(getAttackDamage(), "bites", getAttackAccuracy());
+        return new IntrinsicWeapon(getAttackDamage(), "slams", getAttackAccuracy());
     }
 }

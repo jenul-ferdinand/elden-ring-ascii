@@ -37,6 +37,7 @@ public class Player extends Actor implements Resettable {
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		System.out.println(printHp());
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
