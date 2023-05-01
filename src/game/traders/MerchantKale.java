@@ -1,20 +1,16 @@
 package game.traders;
 
-import edu.monash.fit2099.demo.mars.behaviours.SpitBehaviour;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.behaviour.Behaviour;
-
-import java.util.HashMap;
-import java.util.Map;
+import game.actions.PurchaseAction;
+import game.items.Club;
+import game.utils.Status;
 
 public class MerchantKale extends Trader {
-
-    private Map<Integer, Behaviour> behaviours = new HashMap<>();
-
     /**
      * Constructor.
      *
@@ -28,19 +24,21 @@ public class MerchantKale extends Trader {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        // Loop through the actions
-        for (Behaviour behaviour : behaviours.values()) {
+        // Do nothing
+        return new DoNothingAction();
+    }
 
-            // Get action from the behaviours list
-            Action action = behaviour.getAction(this, map);
-
-            // If there is an action return it
-            if (action != null) {
-                return action;
-            }
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        // Create a new list of actions
+        ActionList actions = new ActionList();
+        // If the other actor has capability HOSTILE_TO_ENEMY, assuming this is the player.
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            // Add the purchase action to the action list
+            actions.add(new PurchaseAction(otherActor, new Club()));
         }
 
-        // Otherwise, do nothing.
-        return new DoNothingAction();
+        // Return the action list
+        return actions;
     }
 }

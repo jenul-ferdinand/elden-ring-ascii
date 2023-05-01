@@ -7,10 +7,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.PurchaseAction;
 import game.enemies.LoneWolf;
 import game.environments.Dirt;
 import game.environments.Floor;
 import game.environments.Wall;
+import game.items.Club;
 import game.traders.MerchantKale;
 import game.utils.FancyMessage;
 
@@ -77,11 +80,16 @@ public class Application {
 		// Create Merchant Kale
 		gameMap.at(38, 9).addActor(new MerchantKale());
 
+
+
 		// HINT: what does it mean to prefer composition to inheritance?
 		// Create a Player
 		Player player = new Player("Tarnished", '@', 300);
 		// Add the Player to the World
 		world.addPlayer(player, gameMap.at(36, 10));
+
+		// Add item test
+		PurchaseAction purchase = new PurchaseAction(player, new Club());
 
 		// Start the World game loop
 		world.run();
