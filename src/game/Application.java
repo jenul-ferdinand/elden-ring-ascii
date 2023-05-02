@@ -13,6 +13,7 @@ import game.defaultGrounds.Dirt;
 import game.defaultGrounds.Floor;
 import game.defaultGrounds.Wall;
 import game.enemies.PileOfBones;
+import game.enemies.SkeletalBandit;
 import game.environments.Graveyard;
 import game.environments.GustOfWind;
 import game.environments.PuddleOfWater;
@@ -80,7 +81,7 @@ public class Application {
 		gameMap.at(23, 17).addActor(new LoneWolf());
 
 		// Create a pile of bones enemy
-		gameMap.at(23, 4).addActor(new PileOfBones());
+		gameMap.at(23, 4).addActor(new PileOfBones(new SkeletalBandit()));
 
 		//create a grossmesser weapon
 		gameMap.at(37,10).addItem(new Grossmesser());

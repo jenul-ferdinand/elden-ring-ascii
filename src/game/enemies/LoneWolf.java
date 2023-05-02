@@ -1,6 +1,7 @@
 package game.enemies;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.enemies.type.Land;
 
 /**
  * BEHOLD, DOG!
@@ -10,7 +11,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
  * Modified by:
  *
  */
-public class LoneWolf extends Enemy {
+public class LoneWolf extends Land {
 
 
     public LoneWolf() {

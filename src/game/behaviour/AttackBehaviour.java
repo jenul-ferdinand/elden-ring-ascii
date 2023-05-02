@@ -30,7 +30,7 @@ public class AttackBehaviour implements Behaviour {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location toAttack = exit.getDestination();
             if (toAttack.containsAnActor()) {
-                if (toAttack.getActor().getClass() != actor.getClass()){
+                if (toAttack.getActor().getClass().getSuperclass() != actor.getClass().getSuperclass()){
                     if(actor.getWeaponInventory().isEmpty()){
                         actions.add(new AttackAction(toAttack.getActor(),exit.getName()));
                     } else{

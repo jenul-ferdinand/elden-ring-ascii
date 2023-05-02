@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.enemies.HeavySkeletalSwordsman;
 import game.enemies.PileOfBones;
+import game.enemies.type.Skeletal;
 
 /**
  * An action executed if an actor is killed.
@@ -37,18 +38,18 @@ public class DeathAction extends Action {
         String result = "";
 
         ActionList dropActions = new ActionList();
-        // drop all items
-        for (Item item : target.getItemInventory())
-            dropActions.add(item.getDropAction(target));
-        for (WeaponItem weapon : target.getWeaponInventory())
-            dropActions.add(weapon.getDropAction(target));
-        for (Action drop : dropActions)
-            drop.execute(target, map);
-        if(target instanceof HeavySkeletalSwordsman){
+        if(target instanceof Skeletal && !(target instanceof PileOfBones)){
             Location pileLocation = map.locationOf(target);
             map.removeActor(target);
-            map.addActor(new PileOfBones(), pileLocation);
+            map.addActor(new PileOfBones((Skeletal) target), pileLocation);
         }else{
+            // drop all items
+            for (Item item : target.getItemInventory())
+                dropActions.add(item.getDropAction(target));
+            for (WeaponItem weapon : target.getWeaponInventory())
+                dropActions.add(weapon.getDropAction(target));
+            for (Action drop : dropActions)
+                drop.execute(target, map);
             // remove actor
             map.removeActor(target);
         }

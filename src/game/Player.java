@@ -48,7 +48,9 @@ public class Player extends Actor implements Resettable {
 	}
 
 	@Override
-	public void reset() {}
+	public void reset() {
+
+	}
 
 	@Override
 	public IntrinsicWeapon getIntrinsicWeapon() {
