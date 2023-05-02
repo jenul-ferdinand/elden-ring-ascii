@@ -7,40 +7,40 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actions.AttackAction;
-import game.behaviour.AttackBehaviour;
-import game.behaviour.Behaviour;
-import game.behaviour.FollowBehaviour;
-import game.behaviour.WanderBehaviour;
-import game.utils.RandomNumberGenerator;
+import game.behaviour.*;
 import game.utils.Status;
 
 import java.util.HashMap;
 import java.util.Map;
 
-abstract class Enemy extends Actor {
+public abstract class Enemy extends Actor {
     private int attackDamage;
     private int attackAccuracy;
+
+    private String specialSkill;
 
     protected Map<Integer, Behaviour> behaviours;
 
     /**
      * Constructor.
      *
-     * @param name            the name of the Actor
-     * @param displayChar     the character that will represent the Actor in the display
-     * @param hitPoints       the Actor's starting hit points
+     * @param name           the name of the Actor
+     * @param displayChar    the character that will represent the Actor in the display
+     * @param hitPoints      the Actor's starting hit points
      * @param attackDamage
      * @param attackAccuracy
+     * @param specialSkill
      */
-    public Enemy(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy) {
+    public Enemy(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy, String specialSkill) {
         super(name, displayChar, hitPoints);
         this.attackDamage = attackDamage;
         this.attackAccuracy = attackAccuracy;
+        this.specialSkill = specialSkill;
         this.behaviours = new HashMap<>();
+        this.behaviours.put(996, new DespawnBehaviour());
         this.behaviours.put(997, new AttackBehaviour());
         this.behaviours.put(999, new WanderBehaviour());
     }
@@ -103,7 +103,6 @@ abstract class Enemy extends Actor {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            this.behaviours.put(998, new FollowBehaviour(otherActor));
             for(Weapon weapon : otherActor.getWeaponInventory()){
                 if(weapon.getSkill(otherActor) != null){
                     actions.add(weapon.getSkill(otherActor));
@@ -133,11 +132,20 @@ abstract class Enemy extends Actor {
                 if(exit1.getDestination().getActor() != null){
                     if(exit1.getDestination().getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
                         System.out.println("following player");
+                        this.behaviours.remove(996);
                         this.behaviours.put(998, new FollowBehaviour(exit1.getDestination().getActor()));
                     }
 
                 }
             }
         }
+    }
+
+    public String getSpecialSkill() {
+        return specialSkill;
+    }
+
+    public void setSpecialSkill(String specialSkill) {
+        this.specialSkill = specialSkill;
     }
 }

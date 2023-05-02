@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
@@ -11,9 +12,11 @@ import game.enemies.LoneWolf;
 import game.defaultGrounds.Dirt;
 import game.defaultGrounds.Floor;
 import game.defaultGrounds.Wall;
+import game.enemies.PileOfBones;
 import game.environments.Graveyard;
 import game.environments.GustOfWind;
 import game.environments.PuddleOfWater;
+import game.items.Grossmesser;
 import game.utils.FancyMessage;
 
 /**
@@ -76,12 +79,19 @@ public class Application {
 		// Create a Lone Wolf enemy
 		gameMap.at(23, 17).addActor(new LoneWolf());
 
+		// Create a pile of bones enemy
+		gameMap.at(23, 4).addActor(new PileOfBones());
+
+		//create a grossmesser weapon
+		gameMap.at(37,10).addItem(new Grossmesser());
+
 		// HINT: what does it mean to prefer composition to inheritance?
 		// Create a Player
 		Player player = new Player("Tarnished", '@', 300);
 
 		// Add the Player to the World
 		world.addPlayer(player, gameMap.at(36, 10));
+
 
 		// Start the World game loop
 		world.run();

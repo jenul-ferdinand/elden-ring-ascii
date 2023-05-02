@@ -30,21 +30,24 @@ public class AttackBehaviour implements Behaviour {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location toAttack = exit.getDestination();
             if (toAttack.containsAnActor()) {
-                if(actor.getWeaponInventory().isEmpty()){
-                    actions.add(new AttackAction(toAttack.getActor(),exit.getName()));
-                } else{
-                    if(RandomNumberGenerator.getRandomInt(100)<50){
-                        if(actor.getWeaponInventory().get(0).getSkill(actor) != null){
-                            actions.add(actor.getWeaponInventory().get(0).getSkill(actor));
+                if (toAttack.getActor().getClass() != actor.getClass()){
+                    if(actor.getWeaponInventory().isEmpty()){
+                        actions.add(new AttackAction(toAttack.getActor(),exit.getName()));
+                    } else{
+                        if(RandomNumberGenerator.getRandomInt(100)<50){
+                            if(actor.getWeaponInventory().get(0).getSkill(actor) != null){
+                                actions.add(actor.getWeaponInventory().get(0).getSkill(actor));
+                            }
+                            if(actor.getWeaponInventory().get(0).getSkill(actor, exit.getName()) != null){
+                                actions.add(actor.getWeaponInventory().get(0).getSkill(actor, exit.getName()));
+                            }
+                        } else {
+                            actions.add(new AttackAction(toAttack.getActor(), exit.getName(), actor.getWeaponInventory().get(0)));
                         }
-                        if(actor.getWeaponInventory().get(0).getSkill(actor, exit.getName()) != null){
-                            actions.add(actor.getWeaponInventory().get(0).getSkill(actor, exit.getName()));
-                        }
-                    } else {
-                        actions.add(new AttackAction(toAttack.getActor(), exit.getName(), actor.getWeaponInventory().get(0)));
-                    }
 
+                    }
                 }
+
 
             }
         }
