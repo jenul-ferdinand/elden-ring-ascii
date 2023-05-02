@@ -17,6 +17,7 @@ public class Graveyard extends Ground {
 
     @Override
     public void tick(Location location){
+        //spawnChance = 0;
         if(location.containsAnActor()){
             return;
         } else if (RandomNumberGenerator.getRandomInt(100) < spawnChance) {
