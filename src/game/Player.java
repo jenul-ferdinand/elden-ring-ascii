@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.SellAction;
 import game.items.Club;
 import game.utils.Resettable;
 import game.utils.Status;
@@ -20,6 +21,7 @@ import game.utils.Status;
  *
  */
 public class Player extends Actor implements Resettable {
+	private int runes = 0;
 
 	private final Menu menu = new Menu();
 
@@ -36,9 +38,24 @@ public class Player extends Actor implements Resettable {
 		this.addWeaponToInventory(new Club());
 	}
 
+	public void addRunes(int amount) {
+		this.runes += amount;
+	}
+	public int getRunes() { return runes; }
+
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-		System.out.println(printHp());
+		// Colours as variables
+		final String ANSI_RESET = "\u001B[0m";
+		final String ANSI_RED = "\u001B[31m";
+		final String ANSI_YELLOW = "\u001B[33m";
+
+		// Print the HP in red
+		display.println(ANSI_RED + "HP: " + printHp() + ANSI_RESET);
+
+		// Print the Runes balance in green
+		display.println(ANSI_YELLOW + "Runes: " + runes + ANSI_RESET);
+
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
@@ -56,5 +73,12 @@ public class Player extends Actor implements Resettable {
 	public IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(11, "punches");
 
+	}
+
+	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+		// Create a new list of actions
+		ActionList actions = new ActionList();
+
+		return actions;
 	}
 }

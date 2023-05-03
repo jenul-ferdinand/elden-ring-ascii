@@ -58,8 +58,13 @@ public class DeathAction extends Action {
         return result;
     }
 
+    /**
+     * The String to be printed for the menu option
+     * @param actor The actor performing the action.
+     * @return String Menu option string
+     */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " is killed.";
+        return "\uD83D\uDC80" + actor + " is killed.";
     }
 }

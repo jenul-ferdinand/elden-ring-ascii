@@ -19,7 +19,6 @@ import game.utils.RandomNumberGenerator;
  *
  */
 public class AttackAction extends Action {
-
 	/**
 	 * The Actor that is to be attacked
 	 */
