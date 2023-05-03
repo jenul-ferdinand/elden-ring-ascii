@@ -13,7 +13,6 @@ import game.defaultGrounds.Wall;
 import game.environments.Graveyard;
 import game.environments.GustOfWind;
 import game.environments.PuddleOfWater;
-import game.environments.SiteOfLostGrace;
 import game.items.Rune;
 import game.traders.MerchantKale;
 
@@ -31,7 +30,7 @@ public class Application {
 		World world = new World(new Display());
 
 		// Create the ground factory
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Graveyard(), new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace());
+		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Graveyard(), new GustOfWind(), new PuddleOfWater());
 
 		// Store the map design in variable map
 		List<String> map = Arrays.asList(
@@ -46,7 +45,7 @@ public class Application {
 				"...........................................................................",
 				"~~~~~~~~~~~......&&&&&............###___###................................",
 				"~~~~~~~~~~~~......................________#....nnnn........................",
-				"~~~~~~~~~~~~~.....................#__U_____................................",
+				"~~~~~~~~~~~~~.....................#___-____................................",
 				"~~~~~~~~~~~~......................#_______#....nnnn........................",
 				"~~~~~~~~~~~.......................###___###................................",
 				"~~~~~~~~~~..........................#___#..................................",
