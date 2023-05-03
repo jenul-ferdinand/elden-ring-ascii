@@ -7,6 +7,13 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 
+/**
+ * The DespawnAction class represents an Action executed when an actor is despawned.
+ *  Created by: Ruilin
+ *  Modified by: Ruilin
+ *  @see Action
+ * An action executed when an actor is despawned.
+ */
 public class DespawnAction extends Action {
     /**
      * The actor to be despawned
@@ -16,7 +23,7 @@ public class DespawnAction extends Action {
 
 
     /**
-     * Constructor
+     * Constructor for DespawnAction
      * @param actor
      */
     public DespawnAction(Actor actor) {
@@ -43,8 +50,11 @@ public class DespawnAction extends Action {
         return result;
     }
 
-
-
+    /**
+     The String to be printed for the menu option.
+     @param actor The actor performing the action.
+     @return String Menu option string
+     */
     @Override
     public String menuDescription(Actor actor) {
         return "💤 " + actor + " is despawned.";

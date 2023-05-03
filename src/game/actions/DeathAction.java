@@ -17,7 +17,7 @@ import game.items.Rune;
  * An action executed if an actor is killed.
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Ruilin
  *
  */
 public class DeathAction extends Action {
@@ -30,7 +30,7 @@ public class DeathAction extends Action {
 
     /**
      * Constructor
-     * @param actor
+     * @param actor attacker
      */
     public DeathAction(Actor actor) {
         this.attacker = actor;

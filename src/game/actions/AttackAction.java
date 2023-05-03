@@ -15,7 +15,7 @@ import game.utils.RandomNumberGenerator;
  * An Action to attack another Actor.
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Ruilin
  *
  */
 public class AttackAction extends Action {
@@ -42,10 +42,11 @@ public class AttackAction extends Action {
 
 
 	/**
-	 * Constructor.
-	 * 
+	 * Constructor for AttackAction with target, direction and weapon.
+	 *
 	 * @param target the Actor to attack
 	 * @param direction the direction where the attack should be performed (only used for display purposes)
+	 * @param weapon the weapon used for the attack
 	 */
 	public AttackAction(Actor target, String direction, Weapon weapon) {
 		this.target = target;

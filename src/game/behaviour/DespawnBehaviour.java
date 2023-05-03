@@ -11,6 +11,18 @@ import game.utils.RandomNumberGenerator;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The DespawnBehaviour class represents the behaviour of an Actor to despawn with a certain probability.
+ * If the random number generated is less than 10,
+ * the Actor will perform the DespawnAction and will be removed from the GameMap.
+ * If not, the Actor will not perform any action.
+ * Created by: Ruilin
+ * Modified by: Ruilin
+ * @see Action
+ * @see Actor
+ * @see GameMap
+ */
+
 public class DespawnBehaviour implements Behaviour {
     private final Random random = new Random();
 

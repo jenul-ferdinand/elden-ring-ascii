@@ -11,6 +11,12 @@ import game.utils.RandomNumberGenerator;
 import java.util.Random;
 import java.util.ArrayList;
 
+/**
+ *The AttackBehaviour class represents a Behaviour that allows an Actor to attack another Actor.
+ *Created by: Ruilin
+ *Modified by: Ruilin
+ *@see Behaviour
+ */
 
 public class AttackBehaviour implements Behaviour {
     private final Random random = new Random();

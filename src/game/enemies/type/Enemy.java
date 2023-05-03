@@ -15,7 +15,13 @@ import game.utils.Status;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * A class extend from actor
+ * The Enemy can follow the player if it is within range, and  attack other actors
+ * that have the HOSTILE_TO_ENEMY.
+ * Created by:Ruilin
+ * Modified by: Ruilin
+ */
 public abstract class Enemy extends Actor {
     private int attackDamage;
     private int attackAccuracy;
@@ -45,26 +51,47 @@ public abstract class Enemy extends Actor {
         this.behaviours.put(999, new WanderBehaviour());
     }
 
+    /**
+     @return the behaviours of Enemy
+     */
     public Map<Integer, Behaviour> getBehaviours() {
         return behaviours;
     }
 
+    /**
+     Sets behaviours of Enemy.
+     @param behaviours the behaviours of Enemy
+     */
     public void setBehaviours(Map<Integer, Behaviour> behaviours) {
         this.behaviours = behaviours;
     }
 
+    /**
+     @return the amount of damage this Enemy's attack deals
+     */
     public int getAttackDamage() {
         return attackDamage;
     }
 
+    /**
+     Sets attack damage of Enemy.
+     @param attackDamage attack damage of Enemy
+     */
     public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
     }
 
+    /**
+     @return the accuracy of Enemy's attack
+     */
     public int getAttackAccuracy() {
         return attackAccuracy;
     }
 
+    /**
+     Sets accuracy of Enemy's attack.
+     @param attackAccuracy the accuracy of Enemy's attack
+     */
     public void setAttackAccuracy(int attackAccuracy) {
         this.attackAccuracy = attackAccuracy;
     }

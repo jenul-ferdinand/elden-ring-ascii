@@ -13,9 +13,9 @@ import game.behaviour.Behaviour;
  * closer to a target Actor.
  *
  *
- * Created by:
+ * Created by: Ruilin
  * @author Riordan D. Alfredo
- * Modified by:
+ * Modified by: Ruilin
  *
  */
 public class FollowBehaviour implements Behaviour {
@@ -23,8 +23,8 @@ public class FollowBehaviour implements Behaviour {
 	private final Actor target;
 
 	/**
-	 * Constructor.
-	 * 
+	 * Constructor for the FollowBehaviour class. Initializes an instance of the FollowBehaviour class with the
+	 * specified target Actor.
 	 * @param subject the Actor to follow
 	 */
 	public FollowBehaviour(Actor subject) {

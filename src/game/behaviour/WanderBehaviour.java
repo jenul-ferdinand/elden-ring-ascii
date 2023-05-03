@@ -11,9 +11,11 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.behaviour.Behaviour;
 
 /**
- * Created by:
+ * Returns a MoveAction to wander to a random location, if possible.
+ * If no movement is possible, returns null.
+ * Created by:Ruilin
  * @author Riordan D. Alfredo
- * Modified by:
+ * Modified by: Ruilin
  *
  */
 public class WanderBehaviour implements Behaviour {
