@@ -11,7 +11,7 @@ import game.behaviour.Behaviour;
 /**
  * A class that figures out a MoveAction that will move the actor one step 
  * closer to a target Actor.
- * @see edu.monash.fit2099.demo.mars.Application
+ *
  *
  * Created by:
  * @author Riordan D. Alfredo

@@ -6,7 +6,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.SellAction;
 import game.items.Club;
+import game.items.FlaskOfCrimsonTears;
 import game.utils.Resettable;
 import game.utils.Status;
 
@@ -19,6 +22,9 @@ import game.utils.Status;
  *
  */
 public class Player extends Actor implements Resettable {
+	private int runes = 0;
+	private int startingX;
+	private int startingY;
 
 	private final Menu menu = new Menu();
 
@@ -30,13 +36,53 @@ public class Player extends Actor implements Resettable {
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
+		// Super class attributes
 		super(name, displayChar, hitPoints);
+
+		// Starting location
+		this.startingX = 38;
+		this.startingY = 9;
+
+		// Capability that the player is hostile to enemies
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
+
+		// Add the Club to the weapon inventory
 		this.addWeaponToInventory(new Club());
+
+		// Add the Flask of Crimson Tears to the inventory
+		this.addItemToInventory(new FlaskOfCrimsonTears());
+	}
+
+
+	public int getStartingX() {
+		return startingX;
+	}
+
+	public int getStartingY() {
+		return startingY;
+	}
+
+	public void addRunes(int amount) {
+		this.runes += amount;
+	}
+
+	public int getRunes() {
+		return runes;
 	}
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		// Colours as variables
+		final String ANSI_RESET = "\u001B[0m";
+		final String ANSI_RED = "\u001B[31m";
+		final String ANSI_YELLOW = "\u001B[33m";
+
+		// Print the HP in red
+		display.println(ANSI_RED + "HP: " + printHp() + ANSI_RESET);
+
+		// Print the Runes balance in green
+		display.println(ANSI_YELLOW + "Runes: " + runes + ANSI_RESET);
+
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
@@ -46,5 +92,24 @@ public class Player extends Actor implements Resettable {
 	}
 
 	@Override
-	public void reset() {}
+	public void reset() {
+
+	}
+
+	/**
+	 * The default weapon
+	 * @return IntrinsicWeapon The player's fists
+	 */
+	@Override
+	public IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(11, "punches");
+	}
+
+
+	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+		// Create a new list of actions
+		ActionList actions = new ActionList();
+
+		return actions;
+	}
 }

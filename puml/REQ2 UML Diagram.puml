@@ -1,0 +1,128 @@
+@startuml
+
+skinparam linetype ortho
+set namespaceSeparator none
+'hide circle
+
+package engine {
+    abstract class Actor <<abstract>>
+    abstract class WeaponItem <<abstract>>
+    abstract class Action <<abstract>>
+    abstract class Item <<abstract>>
+}
+
+package game {
+    package enemies {
+        abstract class Enemy <<abstract>>
+        class HeavySkeletalSwordsman
+        class LoneWolf
+        class GiantCrab
+    }
+
+    package traders {
+        abstract class Trader <<abstract>>
+        class MerchantKale
+    }
+
+    package actions {
+        class PurchaseAction
+        class DeathAction
+        class AttackAction
+        class ConsumeAction
+        class PurchaseAction
+        class SellAction
+    }
+
+    package items {
+        interface Consumable <<interface>>
+
+        class Rune
+        class Grossmesser
+        class Club
+        class Scimitar
+    }
+
+    package utils {
+        class RandomNumberGenerator
+    }
+
+    class Player
+
+    class Application
+}
+
+
+
+
+    ' ========== Generalisations (Parent/Child) ==========
+
+    MerchantKale --|> Trader
+
+    Trader --|> Actor
+
+    HeavySkeletalSwordsman -[#blue]-|> Enemy
+    LoneWolf -[#blue]-|> Enemy
+    GiantCrab -[#blue]-|> Enemy
+
+    Club -[#green]-|> WeaponItem
+    Grossmesser -[#green]-|> WeaponItem
+    Scimitar -[#green]-|> WeaponItem
+
+    PurchaseAction -[#purple]-|> Action
+    SellAction -[#purple]-|> Action
+
+
+
+
+
+
+    ' ========== Realisations (Interfaces) ==========
+
+    Rune ..|> Consumable
+
+
+
+
+
+
+    ' ========== Associations ==========
+
+    MerchantKale "1" --> "2" Item : stores
+
+    DeathAction "0..*" -[#red]-> "1" Rune : drops
+
+    Rune "0..*" --> "1" ConsumeAction : uses
+
+    PurchaseAction "0..*" --> "0..*" WeaponItem : sells
+
+    SellAction "0..*" --> "0..*" WeaponItem : buys
+
+
+
+    ' ========== Dependencies ==========
+
+    Application ..> MerchantKale
+
+    AttackAction ..> DeathAction
+
+    RandomNumberGenerator ..> HeavySkeletalSwordsman
+    RandomNumberGenerator ..> GiantCrab
+    RandomNumberGenerator ..> LoneWolf
+
+    LoneWolf ..> DeathAction
+    HeavySkeletalSwordsman ..> DeathAction
+    GiantCrab ..> DeathAction
+
+    Rune ..> Player
+
+    MerchantKale ..> Player
+    MerchantKale ..> PurchaseAction
+    MerchantKale ..> SellAction
+
+    SellAction ..> Player
+    PurchaseAction ..> Player
+
+
+}
+
+@enduml
