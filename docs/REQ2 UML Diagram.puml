@@ -2,7 +2,7 @@
 
 skinparam linetype ortho
 set namespaceSeparator none
-'hide circle
+hide circle
 
 package engine {
     abstract class Actor <<abstract>>
@@ -45,10 +45,8 @@ package game {
         class RandomNumberGenerator
     }
 
-    ' Player
     class Player
 
-    ' Driver Class
     class Application
 }
 
@@ -78,7 +76,6 @@ package game {
 
     ' ========== Realisations (Interfaces) ==========
 
-    ' Runes are consumable
     Rune ..|> Consumables
 
 
@@ -88,11 +85,9 @@ package game {
 
     ' ========== Associations ==========
 
-    ' MerchantKale who trades weapons
     MerchantKale "1" --> "0..*" Club : transacts
     MerchantKale "1" --> "0..*" Grossmesser : buys
 
-    ' Enemies dropping Runes
     DeathAction "0..*" ---> "1" Rune : drops
 
 
@@ -100,9 +95,7 @@ package game {
 
     ' ========== Dependencies ==========
 
-    ' Application creates MerchantKale
     Application ..> MerchantKale
-
 
     AttackAction ..> DeathAction
 
@@ -110,22 +103,18 @@ package game {
     RandomNumberGenerator ..> GiantCrab
     RandomNumberGenerator ..> LoneWolf
 
-
-    ' Rune adds to the Player's runes balance
     Rune ..> Player
 
-    ' Player interacts with MerchantKale
     MerchantKale ..> Player
-
-    ' MerchantKale creates a PurchaseAction
     MerchantKale ..> PurchaseAction
+    MerchantKale ..> SellAction
 
     PurchaseAction ..> WeaponItem
     SellAction ..> WeaponItem
     SellAction ..> Player
     PurchaseAction ..> Player
 
-    MerchantKale ..> SellAction
+
 }
 
 @enduml
