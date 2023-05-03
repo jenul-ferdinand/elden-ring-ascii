@@ -23,6 +23,8 @@ import game.utils.Status;
  */
 public class Player extends Actor implements Resettable {
 	private int runes = 0;
+	private int startingX;
+	private int startingY;
 
 	private final Menu menu = new Menu();
 
@@ -37,6 +39,10 @@ public class Player extends Actor implements Resettable {
 		// Super class attributes
 		super(name, displayChar, hitPoints);
 
+		// Starting location
+		this.startingX = 38;
+		this.startingY = 9;
+
 		// Capability that the player is hostile to enemies
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 
@@ -48,10 +54,21 @@ public class Player extends Actor implements Resettable {
 	}
 
 
+	public int getStartingX() {
+		return startingX;
+	}
+
+	public int getStartingY() {
+		return startingY;
+	}
+
 	public void addRunes(int amount) {
 		this.runes += amount;
 	}
-	public int getRunes() { return runes; }
+
+	public int getRunes() {
+		return runes;
+	}
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {

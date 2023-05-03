@@ -19,6 +19,7 @@ import game.enemies.SkeletalBandit;
 import game.environments.Graveyard;
 import game.environments.GustOfWind;
 import game.environments.PuddleOfWater;
+import game.environments.SiteOfLostGrace;
 import game.items.Grossmesser;
 import game.items.Club;
 import game.items.Rune;
@@ -39,7 +40,7 @@ public class Application {
 		World world = new World(new Display());
 
 		// Create the ground factory
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Graveyard(), new GustOfWind(), new PuddleOfWater());
+		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Graveyard(), new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace());
 
 		// Store the map design in variable map
 		List<String> map = Arrays.asList(
@@ -54,7 +55,7 @@ public class Application {
 				"...........................................................................",
 				"~~~~~~~~~~~......&&&&&............###___###................................",
 				"~~~~~~~~~~~~......................________#....nnnn........................",
-				"~~~~~~~~~~~~~.....................#________................................",
+				"~~~~~~~~~~~~~.....................#__U_____................................",
 				"~~~~~~~~~~~~......................#_______#....nnnn........................",
 				"~~~~~~~~~~~.......................###___###................................",
 				"~~~~~~~~~~..........................#___#..................................",
@@ -83,8 +84,6 @@ public class Application {
 //			}
 //		}
 
-		// Create a Lone Wolf enemy
-		gameMap.at(23, 17).addActor(new LoneWolf());
 		// Create Merchant Kale
 		gameMap.at(40, 12).addActor(new MerchantKale());
 
@@ -92,16 +91,10 @@ public class Application {
 		gameMap.at(38, 15).addItem(new Rune(100));
 		gameMap.at(38, 16).addItem(new Rune(100));
 
-		// Create a pile of bones enemy
-		gameMap.at(23, 4).addActor(new PileOfBones(new SkeletalBandit()));
-
-		//create a grossmesser weapon
-		gameMap.at(37,10).addItem(new Grossmesser());
-
 		// Create a Player
 		Player player = new Player("Tarnished", '@', 300);
 		// Add the Player to the World
-		world.addPlayer(player, gameMap.at(36, 10));
+		world.addPlayer(player, gameMap.at(player.getStartingX(), player.getStartingY()));
 
 
 		// Start the World game loop

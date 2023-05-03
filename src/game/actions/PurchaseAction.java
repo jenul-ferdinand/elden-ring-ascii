@@ -23,6 +23,8 @@ public class PurchaseAction extends Action {
      */
     private final int cost;
 
+
+
     /**
      * Constructor
      * @param receiver The recipient of the item
@@ -33,6 +35,8 @@ public class PurchaseAction extends Action {
         this.item = item;
         this.cost = cost;
     }
+
+
 
     /**
      * This method will add the item to the player's inventory and deduct the runes based on the cost
@@ -61,6 +65,8 @@ public class PurchaseAction extends Action {
         // Return if the player is too broke
         return "Insufficient Balance";
     }
+
+
 
     /**
      * This will be the String of the menu option for the user to choose

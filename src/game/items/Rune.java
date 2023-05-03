@@ -33,7 +33,6 @@ public class Rune extends Item implements Consumable {
         // Add the ConsumeAction
         consumeAction = new ConsumeAction(this);
         this.addAction(consumeAction);
-
     }
 
 
