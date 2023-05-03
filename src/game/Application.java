@@ -15,6 +15,7 @@ import game.environments.GustOfWind;
 import game.environments.PuddleOfWater;
 import game.items.Rune;
 import game.traders.MerchantKale;
+import game.utils.FancyMessage;
 
 /**
  * The main class to start the game.
