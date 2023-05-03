@@ -5,6 +5,8 @@ import game.enemies.type.Land;
 import game.enemies.type.Sea;
 import game.enemies.type.Skeletal;
 import game.items.Grossmesser;
+import game.items.Rune;
+import game.utils.RandomNumberGenerator;
 
 public class GiantDog extends Land {
     /**
@@ -19,6 +21,7 @@ public class GiantDog extends Land {
      */
     public GiantDog() {
         super("Giant Dog", 'G', 693 ,314 ,90, "AOE");
+        this.addItemToInventory(new Rune(RandomNumberGenerator.getRandomInt(313,1808)));
     }
 
     @Override

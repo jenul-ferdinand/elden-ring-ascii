@@ -7,9 +7,11 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.Player;
 import game.enemies.HeavySkeletalSwordsman;
 import game.enemies.PileOfBones;
 import game.enemies.type.Skeletal;
+import game.items.Rune;
 
 /**
  * An action executed if an actor is killed.
@@ -45,7 +47,12 @@ public class DeathAction extends Action {
         }else{
             // drop all items
             for (Item item : target.getItemInventory())
-                dropActions.add(item.getDropAction(target));
+                if(!(item instanceof Rune)){
+                    dropActions.add(item.getDropAction(target));
+                } else if(attacker instanceof Player){
+                    dropActions.add(item.getDropAction(target));
+                }
+
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
