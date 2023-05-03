@@ -8,12 +8,25 @@ import game.Player;
 import game.items.Consumable;
 
 public class ConsumeAction extends Action {
+    /**
+     * Variable to store our consumable item
+     */
     private Consumable consumable;
 
+    /**
+     * Constructor
+     * @param consumable The consumable item
+     */
     public ConsumeAction(Consumable consumable) {
         this.consumable = consumable;
     }
 
+    /**
+     * Call the consumedBy method of the consumable
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return String The confirmation message
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         // Consume the item and pass the actor
@@ -26,6 +39,12 @@ public class ConsumeAction extends Action {
         return actor + " consumes " + consumable;
     }
 
+
+    /**
+     * The menu option text String
+     * @param actor The actor performing the action.
+     * @return String The menu option
+     */
     @Override
     public String menuDescription(Actor actor) {
         return "Consume " + consumable;

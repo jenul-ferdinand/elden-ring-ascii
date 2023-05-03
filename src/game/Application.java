@@ -30,11 +30,9 @@ public class Application {
 	public static void main(String[] args) {
 		// Create a new World (It contains the main game loop)
 		World world = new World(new Display());
-
-		//
+		// Create the ground factory
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor());
-
-		// Create and store a new map
+		// Store the map design in variable map
 		List<String> map = Arrays.asList(
 				"...........................................................................",
 				"......................#####....######......................................",
@@ -60,8 +58,9 @@ public class Application {
 				"..####__###..................................................._.....__.#...",
 				"..............................................................###..__###...",
 				"...........................................................................");
-		GameMap gameMap = new GameMap(groundFactory, map);
 
+		// Create an instance of the game map
+		GameMap gameMap = new GameMap(groundFactory, map);
 		// Add the new map to the world
 		world.addGameMap(gameMap);
 
@@ -75,21 +74,23 @@ public class Application {
 //			}
 //		}
 
+
+
+
 		// Create a Lone Wolf enemy
 		gameMap.at(23, 17).addActor(new LoneWolf());
-
 		// Create Merchant Kale
-		gameMap.at(38, 9).addActor(new MerchantKale());
+		gameMap.at(40, 12).addActor(new MerchantKale());
 
 		// Create a Rune for testing
 		gameMap.at(38, 15).addItem(new Rune(100));
 		gameMap.at(38, 16).addItem(new Rune(100));
 
-		// HINT: what does it mean to prefer composition to inheritance?
 		// Create a Player
 		Player player = new Player("Tarnished", '@', 300);
 		// Add the Player to the World
 		world.addPlayer(player, gameMap.at(36, 10));
+
 
 		// Start the World game loop
 		world.run();

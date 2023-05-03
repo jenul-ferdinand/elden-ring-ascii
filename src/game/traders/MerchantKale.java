@@ -5,21 +5,36 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.PurchaseAction;
+import game.actions.SellAction;
 import game.items.Club;
+import game.items.Rune;
 import game.utils.Status;
 
+import java.util.ArrayList;
+
 public class MerchantKale extends Trader {
+
+    private final ArrayList<Item> inventory = new ArrayList<>();
+    private final ArrayList<Integer> prices = new ArrayList<>();
+    private final ArrayList<Integer> sellPrices = new ArrayList<>();
+
     /**
      * Constructor.
-     *
-     * @param name the name of the Actor
-     * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints the Actor's starting hit points
      */
     public MerchantKale() {
         super("Merchant Kale", 'K', 999);
+
+        // Club
+        this.inventory.add(new Club());
+        this.prices.add(100);
+
+        // DEBUG ITEM
+        this.inventory.add(new Club());
+        this.prices.add(50);
     }
 
     /**
@@ -50,8 +65,25 @@ public class MerchantKale extends Trader {
 
         // If the other actor has capability HOSTILE_TO_ENEMY, assuming this is the player.
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            // Add the purchase action to the action list
-            actions.add(new PurchaseAction(otherActor, new Club()));
+            // Purchasing
+            for (int i = 0; i < inventory.size(); i++) {
+                // Add the purchase action to the action list
+                actions.add(new PurchaseAction(otherActor, inventory.get(i), prices.get(i)));
+            }
+
+            // Selling
+            for (int k = 0; k < otherActor.getWeaponInventory().size(); k++) {
+                // Weapon item
+                Item weaponItem = otherActor.getWeaponInventory().get(k);
+
+                // Switch for weapon selling prices
+                switch (weaponItem.toString()) {
+                    case "Club", "Grossmesser" -> sellPrices.add(100);
+                }
+
+                // Add the sell action to the actions list
+                actions.add(new SellAction(weaponItem, sellPrices.get(k)));
+            }
         }
 
         // Return the action list

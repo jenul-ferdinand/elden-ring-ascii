@@ -54,6 +54,6 @@ public class DeathAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " is killed.";
+        return "\uD83D\uDC80" + actor + " is killed.";
     }
 }
