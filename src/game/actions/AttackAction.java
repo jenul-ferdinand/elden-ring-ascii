@@ -129,6 +129,6 @@ public class AttackAction extends Action {
 	 */
 	@Override
 	public String menuDescription(Actor actor) {
-		return actor + " attacks " + target + " at " + direction + " with " + (weapon != null ? weapon : "Intrinsic Weapon");
+		return "⚔️ " + actor + " attacks " + target + " at " + direction + " with " + (weapon != null ? weapon : "Intrinsic Weapon");
 	}
 }

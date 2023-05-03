@@ -78,7 +78,8 @@ public class MerchantKale extends Trader {
 
                 // Switch for weapon selling prices
                 switch (weaponItem.toString()) {
-                    case "Club", "Grossmesser" -> sellPrices.add(100);
+                    case "Club" -> sellPrices.add(100);
+                    case "Grossmesser" -> sellPrices.add(200);
                 }
 
                 // Add the sell action to the actions list

@@ -69,6 +69,6 @@ public class PurchaseAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return "\uD83D\uDED2 Purchase " + item + " from Trader for " + cost + " runes";
+        return "🛒 Purchase " + item + " from Trader for " + cost + " runes";
     }
 }

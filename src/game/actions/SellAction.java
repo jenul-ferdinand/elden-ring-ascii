@@ -56,6 +56,6 @@ public class SellAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return "\uD83D\uDCB2 Sell " + item + " to MerchantKale for " + profit + " Runes";
+        return "💲 Sell " + item + " to MerchantKale for " + profit + " Runes";
     }
 }

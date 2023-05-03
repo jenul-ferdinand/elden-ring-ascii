@@ -1,7 +1,12 @@
 package game.enemies;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.AttackAction;
 import game.enemies.type.Land;
+import game.utils.Status;
 
 /**
  * BEHOLD, DOG!
@@ -23,7 +28,7 @@ public class LoneWolf extends Land {
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
-     * @return
+     * @return ActionList Returns the list of actions
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {

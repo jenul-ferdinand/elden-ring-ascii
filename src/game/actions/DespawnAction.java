@@ -28,12 +28,12 @@ public class DespawnAction extends Action {
 
         // remove actor
         map.removeActor(target);
-        result += System.lineSeparator() + menuDescription(target);
+        result += menuDescription(target);
         return result;
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " is despawned.";
+        return "💤 " + actor + " is despawned.";
     }
 }

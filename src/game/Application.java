@@ -37,12 +37,10 @@ public class Application {
 	public static void main(String[] args) {
 		// Create a new World (It contains the main game loop)
 		World world = new World(new Display());
-		
-		//
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Graveyard(), new GustOfWind(), new PuddleOfWater());
 
 		// Create the ground factory
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor());
+		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Graveyard(), new GustOfWind(), new PuddleOfWater());
+
 		// Store the map design in variable map
 		List<String> map = Arrays.asList(
 				"..nnnn................................................~~~~~~~~~~~~~~~~~~~~~",
@@ -84,7 +82,6 @@ public class Application {
 //				exception.printStackTrace();
 //			}
 //		}
-
 
 		// Create a Lone Wolf enemy
 		gameMap.at(23, 17).addActor(new LoneWolf());
