@@ -2,7 +2,7 @@
 
 skinparam linetype ortho
 set namespaceSeparator none
-'hide circle
+hide circle
 
 package engine {
     abstract class Actor <<abstract>>
