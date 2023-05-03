@@ -65,14 +65,14 @@ public class Application {
 		world.addGameMap(gameMap);
 
 		// Display the ELDEN RING title card
-//		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
-//			new Display().println(line);
-//			try {
-//				Thread.sleep(200);
-//			} catch (Exception exception) {
-//				exception.printStackTrace();
-//			}
-//		}
+		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
+			new Display().println(line);
+			try {
+				Thread.sleep(200);
+			} catch (Exception exception) {
+				exception.printStackTrace();
+			}
+		}
 
 		// Create Merchant Kale
 		gameMap.at(40, 12).addActor(new MerchantKale());
