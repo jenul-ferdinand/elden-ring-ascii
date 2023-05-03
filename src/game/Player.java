@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.SellAction;
 import game.items.Club;
 import game.utils.Resettable;
@@ -64,15 +65,20 @@ public class Player extends Actor implements Resettable {
 	}
 
 	@Override
+	public void reset() {
+
+	}
+
+	@Override
+	public IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(11, "punches");
+
+	}
+
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 		// Create a new list of actions
 		ActionList actions = new ActionList();
 
-
-
 		return actions;
 	}
-
-	@Override
-	public void reset() {}
 }

@@ -24,7 +24,11 @@ public class ResetManager {
 
     public void run() {}
 
-    public void registerResettable(Resettable resettable) {}
+    public void registerResettable(Resettable resettable) {
+        this.resettables.add(resettable);
+    }
 
-    public void removeResettable(Resettable resettable) {}
+    public void removeResettable(Resettable resettable) {
+        this.resettables.remove(resettable);
+    }
 }
