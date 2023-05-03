@@ -26,6 +26,11 @@ package game {
 
     package actions {
         class PurchaseAction
+        class DeathAction
+        class AttackAction
+        class ConsumeAction
+        class PurchaseAction
+        class SellAction
     }
 
     package items {
@@ -34,6 +39,10 @@ package game {
         class Rune
         class Grossmesser
         class Club
+    }
+
+    package utils {
+        class RandomNumberGenerator
     }
 
     ' Player
@@ -60,6 +69,9 @@ package game {
     Grossmesser -[#green]-|> WeaponItem
 
     PurchaseAction --|> Action
+    SellAction --|> Action
+
+
 
 
 
@@ -72,6 +84,8 @@ package game {
 
 
 
+
+
     ' ========== Associations ==========
 
     ' MerchantKale who trades weapons
@@ -79,9 +93,7 @@ package game {
     MerchantKale "1" --> "0..*" Grossmesser : buys
 
     ' Enemies dropping Runes
-    HeavySkeletalSwordsman --> "1" Rune : drops
-    LoneWolf --> "1" Rune : drops
-    GiantCrab --> "1" Rune : drops
+    DeathAction "0..*" ---> "1" Rune : drops
 
 
 
@@ -89,21 +101,31 @@ package game {
     ' ========== Dependencies ==========
 
     ' Application creates MerchantKale
-    Application .> MerchantKale
+    Application ..> MerchantKale
 
-    ' Application creates Enemies
-    Application ..> HeavySkeletalSwordsman
-    Application ..> LoneWolf
-    Application ..> GiantCrab
+
+    AttackAction ..> DeathAction
+
+    RandomNumberGenerator ..> HeavySkeletalSwordsman
+    RandomNumberGenerator ..> GiantCrab
+    RandomNumberGenerator ..> LoneWolf
+
 
     ' Rune adds to the Player's runes balance
     Rune ..> Player
 
     ' Player interacts with MerchantKale
-    Player ..> MerchantKale
+    MerchantKale ..> Player
 
     ' MerchantKale creates a PurchaseAction
     MerchantKale ..> PurchaseAction
+
+    PurchaseAction ..> WeaponItem
+    SellAction ..> WeaponItem
+    SellAction ..> Player
+    PurchaseAction ..> Player
+
+    MerchantKale ..> SellAction
 }
 
 @enduml

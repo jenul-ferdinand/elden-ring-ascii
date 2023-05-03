@@ -4,26 +4,17 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actions.PurchaseAction;
-import game.enemies.LoneWolf;
 import game.defaultGrounds.Dirt;
 import game.defaultGrounds.Floor;
 import game.defaultGrounds.Wall;
-import game.enemies.PileOfBones;
-import game.enemies.SkeletalBandit;
 import game.environments.Graveyard;
 import game.environments.GustOfWind;
 import game.environments.PuddleOfWater;
-import game.items.Grossmesser;
-import game.items.Club;
 import game.items.Rune;
 import game.traders.MerchantKale;
-import game.utils.FancyMessage;
 
 /**
  * The main class to start the game.
@@ -83,8 +74,6 @@ public class Application {
 //			}
 //		}
 
-		// Create a Lone Wolf enemy
-		gameMap.at(23, 17).addActor(new LoneWolf());
 		// Create Merchant Kale
 		gameMap.at(40, 12).addActor(new MerchantKale());
 
@@ -92,16 +81,10 @@ public class Application {
 		gameMap.at(38, 15).addItem(new Rune(100));
 		gameMap.at(38, 16).addItem(new Rune(100));
 
-		// Create a pile of bones enemy
-		gameMap.at(23, 4).addActor(new PileOfBones(new SkeletalBandit()));
-
-		//create a grossmesser weapon
-		gameMap.at(37,10).addItem(new Grossmesser());
-
 		// Create a Player
 		Player player = new Player("Tarnished", '@', 300);
 		// Add the Player to the World
-		world.addPlayer(player, gameMap.at(36, 10));
+		world.addPlayer(player, gameMap.at(player.getStartingX(), player.getStartingY()));
 
 
 		// Start the World game loop
