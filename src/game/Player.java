@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.SellAction;
 import game.items.Club;
+import game.items.FlaskOfCrimsonTears;
 import game.utils.Resettable;
 import game.utils.Status;
 
@@ -33,10 +34,19 @@ public class Player extends Actor implements Resettable {
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
+		// Super class attributes
 		super(name, displayChar, hitPoints);
+
+		// Capability that the player is hostile to enemies
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
+
+		// Add the Club to the weapon inventory
 		this.addWeaponToInventory(new Club());
+
+		// Add the Flask of Crimson Tears to the inventory
+		this.addItemToInventory(new FlaskOfCrimsonTears());
 	}
+
 
 	public void addRunes(int amount) {
 		this.runes += amount;
@@ -69,11 +79,15 @@ public class Player extends Actor implements Resettable {
 
 	}
 
+	/**
+	 * The default weapon
+	 * @return IntrinsicWeapon The player's fists
+	 */
 	@Override
 	public IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(11, "punches");
-
 	}
+
 
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 		// Create a new list of actions

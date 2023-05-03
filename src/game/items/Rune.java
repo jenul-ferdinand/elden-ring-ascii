@@ -16,11 +16,14 @@ public class Rune extends Item implements Consumable {
      */
     private Action consumeAction;
 
+
+
     /**
      * Constructor.
      *
      */
     public Rune(int value) {
+
         // Set the default attributes
         super("Rune", '$', true);
 
@@ -30,7 +33,10 @@ public class Rune extends Item implements Consumable {
         // Add the ConsumeAction
         consumeAction = new ConsumeAction(this);
         this.addAction(consumeAction);
+
     }
+
+
 
     /**
      * When called the Rune value will be added to the player's runes balance
@@ -38,14 +44,18 @@ public class Rune extends Item implements Consumable {
      */
     @Override
     public void consumedBy(Player player) {
+
         // Set the runes value for the player
         player.addRunes(value);
 
         // Remove the ConsumeAction
         this.removeAction(consumeAction);
 
-        // Drop the item and make it not portable
+        // Drop the item
         this.getDropAction(player);
+
+        // Make it not portable (delete)
         this.togglePortability();
+
     }
 }

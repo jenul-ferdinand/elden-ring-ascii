@@ -7,11 +7,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.items.Club;
-import game.items.Rune;
 import game.items.Scimitar;
 import game.utils.Status;
 
@@ -19,24 +17,43 @@ import java.util.ArrayList;
 
 public class MerchantKale extends Trader {
 
+    /**
+     * A list for the items in the merhant's inventory
+     */
     private final ArrayList<Item> inventory = new ArrayList<>();
-    private final ArrayList<Integer> prices = new ArrayList<>();
+
+    /**
+     * A list for the prices that the merchant will sell for
+     */
     private final ArrayList<Integer> sellPrices = new ArrayList<>();
+
+    /**
+     * A list for the prices that the merchant will buy for
+     */
+    private final ArrayList<Integer> buyPrices = new ArrayList<>();
+
+
 
     /**
      * Constructor.
      */
     public MerchantKale() {
+
+        // Superclass attributes
         super("Merchant Kale", 'K', 999);
 
+        // Initial Inventory
         // Club
         this.inventory.add(new Club());
-        this.prices.add(100);
+        this.sellPrices.add(600);
 
-        // DEBUG ITEM
+        // Scimitar
         this.inventory.add(new Scimitar());
-        this.prices.add(50);
+        this.sellPrices.add(600);
+
     }
+
+
 
     /**
      * The merchant does not move
@@ -48,9 +65,13 @@ public class MerchantKale extends Trader {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
         // Do nothing
         return new DoNothingAction();
+
     }
+
+
 
     /**
      * Merchant actions
@@ -61,35 +82,44 @@ public class MerchantKale extends Trader {
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+
         // Create a new list of actions
         ActionList actions = new ActionList();
 
         // If the other actor has capability HOSTILE_TO_ENEMY, assuming this is the player.
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+
             // Purchasing
             for (int i = 0; i < inventory.size(); i++) {
+
                 // Add the purchase action to the action list
-                actions.add(new PurchaseAction(otherActor, inventory.get(i), prices.get(i)));
+                actions.add(new PurchaseAction(otherActor, inventory.get(i), sellPrices.get(i)));
+
             }
+
 
             // Selling
             for (int k = 0; k < otherActor.getWeaponInventory().size(); k++) {
+
                 // Weapon item
                 Item weaponItem = otherActor.getWeaponInventory().get(k);
 
-                // Switch for weapon selling prices
+                // Switch for weapon buying prices
                 switch (weaponItem.toString()) {
-                    case "Club" -> sellPrices.add(100);
-                    case "Grossmesser" -> sellPrices.add(200);
-                    case "Scimitar" -> sellPrices.add(300);
+                    case "Club", "Grossmesser", "Scimitar" -> buyPrices.add(100);
                 }
 
                 // Add the sell action to the actions list
-                actions.add(new SellAction(weaponItem, sellPrices.get(k)));
+                actions.add(new SellAction(weaponItem, buyPrices.get(k)));
+
             }
+
         }
 
         // Return the action list
         return actions;
     }
+
+
+
 }

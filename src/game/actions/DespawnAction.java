@@ -8,11 +8,22 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 
 public class DespawnAction extends Action {
+    /**
+     * The actor to be despawned
+     */
     private Actor DespawnActor;
 
+
+
+    /**
+     * Constructor
+     * @param actor
+     */
     public DespawnAction(Actor actor) {
         this.DespawnActor = actor;
     }
+
+
 
     /**
      * When the target is killed, the items & weapons carried by target
@@ -31,6 +42,8 @@ public class DespawnAction extends Action {
         result += menuDescription(target);
         return result;
     }
+
+
 
     @Override
     public String menuDescription(Actor actor) {

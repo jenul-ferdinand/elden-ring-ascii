@@ -11,7 +11,7 @@ public class Scimitar extends WeaponItem {
      * Constructor
      */
     public Scimitar() {
-        super("Scimitar", '?', 118, "bonks", 88);
+        super("Scimitar", 's', 118, "bonks", 88);
     }
 
     @Override

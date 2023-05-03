@@ -13,6 +13,8 @@ public class ConsumeAction extends Action {
      */
     private Consumable consumable;
 
+
+
     /**
      * Constructor
      * @param consumable The consumable item
@@ -20,6 +22,8 @@ public class ConsumeAction extends Action {
     public ConsumeAction(Consumable consumable) {
         this.consumable = consumable;
     }
+
+
 
     /**
      * Call the consumedBy method of the consumable
@@ -38,6 +42,7 @@ public class ConsumeAction extends Action {
         // Return the confirmation message
         return actor + " consumes " + consumable;
     }
+
 
 
     /**

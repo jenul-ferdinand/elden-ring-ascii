@@ -39,6 +39,8 @@ public class AttackAction extends Action {
 	 */
 	private Weapon weapon;
 
+
+
 	/**
 	 * Constructor.
 	 * 
@@ -51,6 +53,8 @@ public class AttackAction extends Action {
 		this.weapon = weapon;
 	}
 
+
+
 	/**
 	 * Constructor with intrinsic weapon as default
 	 *
@@ -61,6 +65,8 @@ public class AttackAction extends Action {
 		this.target = target;
 		this.direction = direction;
 	}
+
+
 
 	/**
 	 * When executed, the chance to hit of the weapon that the Actor used is computed to determine whether
@@ -120,6 +126,8 @@ public class AttackAction extends Action {
 
 		return result;
 	}
+
+
 
 	/**
 	 * Describes which target the actor is attacking with which weapon

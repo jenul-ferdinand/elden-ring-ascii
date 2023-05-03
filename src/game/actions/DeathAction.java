@@ -19,11 +19,22 @@ import game.enemies.type.Skeletal;
  *
  */
 public class DeathAction extends Action {
+    /**
+     * The attacker
+     */
     private Actor attacker;
 
+
+
+    /**
+     * Constructor
+     * @param actor
+     */
     public DeathAction(Actor actor) {
         this.attacker = actor;
     }
+
+
 
     /**
      * When the target is killed, the items & weapons carried by target
@@ -57,6 +68,8 @@ public class DeathAction extends Action {
         result += System.lineSeparator() + menuDescription(target);
         return result;
     }
+
+
 
     /**
      * The String to be printed for the menu option
