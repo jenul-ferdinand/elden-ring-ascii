@@ -2,16 +2,16 @@
 
 skinparam linetype ortho
 set namespaceSeparator none
-hide circle
+'hide circle
 
 package engine {
     abstract class Actor <<abstract>>
     abstract class WeaponItem <<abstract>>
-    interface Action <<interface>>
+    abstract class Action <<abstract>>
+    abstract class Item <<abstract>>
 }
 
 package game {
-
     package enemies {
         abstract class Enemy <<abstract>>
         class HeavySkeletalSwordsman
@@ -34,11 +34,12 @@ package game {
     }
 
     package items {
-        interface Consumables <<interface>>
+        interface Consumable <<interface>>
 
         class Rune
         class Grossmesser
         class Club
+        class Scimitar
     }
 
     package utils {
@@ -65,9 +66,10 @@ package game {
 
     Club -[#green]-|> WeaponItem
     Grossmesser -[#green]-|> WeaponItem
+    Scimitar -[#green]-|> WeaponItem
 
-    PurchaseAction --|> Action
-    SellAction --|> Action
+    PurchaseAction -[#purple]-|> Action
+    SellAction -[#purple]-|> Action
 
 
 
@@ -76,7 +78,7 @@ package game {
 
     ' ========== Realisations (Interfaces) ==========
 
-    Rune ..|> Consumables
+    Rune ..|> Consumable
 
 
 
@@ -85,11 +87,15 @@ package game {
 
     ' ========== Associations ==========
 
-    MerchantKale "1" --> "0..*" Club : transacts
-    MerchantKale "1" --> "0..*" Grossmesser : buys
+    MerchantKale "1" --> "2" Item : stores
 
-    DeathAction "0..*" ---> "1" Rune : drops
+    DeathAction "0..*" -[#red]-> "1" Rune : drops
 
+    Rune "0..*" --> "1" ConsumeAction : uses
+
+    PurchaseAction "0..*" --> "0..*" WeaponItem : sells
+
+    SellAction "0..*" --> "0..*" WeaponItem : buys
 
 
 
@@ -103,14 +109,16 @@ package game {
     RandomNumberGenerator ..> GiantCrab
     RandomNumberGenerator ..> LoneWolf
 
+    LoneWolf ..> DeathAction
+    HeavySkeletalSwordsman ..> DeathAction
+    GiantCrab ..> DeathAction
+
     Rune ..> Player
 
     MerchantKale ..> Player
     MerchantKale ..> PurchaseAction
     MerchantKale ..> SellAction
 
-    PurchaseAction ..> WeaponItem
-    SellAction ..> WeaponItem
     SellAction ..> Player
     PurchaseAction ..> Player
 
