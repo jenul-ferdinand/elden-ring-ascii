@@ -12,6 +12,7 @@ import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.items.Club;
 import game.items.Rune;
+import game.items.Scimitar;
 import game.utils.Status;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class MerchantKale extends Trader {
         this.prices.add(100);
 
         // DEBUG ITEM
-        this.inventory.add(new Club());
+        this.inventory.add(new Scimitar());
         this.prices.add(50);
     }
 
@@ -80,6 +81,7 @@ public class MerchantKale extends Trader {
                 switch (weaponItem.toString()) {
                     case "Club" -> sellPrices.add(100);
                     case "Grossmesser" -> sellPrices.add(200);
+                    case "Scimitar" -> sellPrices.add(300);
                 }
 
                 // Add the sell action to the actions list
