@@ -2,6 +2,8 @@ package game.enemies;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.enemies.type.Sea;
+import game.items.Rune;
+import game.utils.RandomNumberGenerator;
 
 public class GiantCrayfish extends Sea {
     /**
@@ -16,6 +18,7 @@ public class GiantCrayfish extends Sea {
      */
     public GiantCrayfish() {
         super("Giant Crayfish", 'R', 4803,527,100, "AOE");
+        this.addItemToInventory(new Rune(RandomNumberGenerator.getRandomInt(500,2374)));
     }
 
     @Override
