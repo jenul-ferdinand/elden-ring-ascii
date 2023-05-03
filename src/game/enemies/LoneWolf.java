@@ -18,19 +18,17 @@ import game.utils.Status;
  *
  */
 public class LoneWolf extends Land {
+    /**
+     * Constructor
+     */
     public LoneWolf() {
         super("Lone Wolf", 'h', 102,97,95, null);
     }
 
     /**
-     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
-     *
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return ActionList Returns the list of actions
+     * The default weapon of the enemy
+     * @return
      */
-
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(getAttackDamage(), "bites", getAttackAccuracy());

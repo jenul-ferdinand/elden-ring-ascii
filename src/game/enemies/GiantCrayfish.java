@@ -21,6 +21,10 @@ public class GiantCrayfish extends Sea {
         this.addItemToInventory(new Rune(RandomNumberGenerator.getRandomInt(500,2374)));
     }
 
+    /**
+     * The default weapon of the enemy
+     * @return IntrinsicWeapon
+     */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(getAttackDamage(), "giant pincer", getAttackAccuracy());

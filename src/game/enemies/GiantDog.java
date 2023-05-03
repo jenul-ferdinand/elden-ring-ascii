@@ -24,6 +24,10 @@ public class GiantDog extends Land {
         this.addItemToInventory(new Rune(RandomNumberGenerator.getRandomInt(313,1808)));
     }
 
+    /**
+     * The default weapon of the enemy
+     * @return IntrinsicWeapon
+     */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(getAttackDamage(), "bites", getAttackAccuracy());
