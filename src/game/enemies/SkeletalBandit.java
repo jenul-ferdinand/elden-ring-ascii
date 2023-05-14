@@ -5,10 +5,11 @@ import game.items.Grossmesser;
 import game.items.Rune;
 import game.items.Scimitar;
 import game.utils.RandomNumberGenerator;
+import game.utils.Status;
 
 public class SkeletalBandit extends Skeletal {
     public SkeletalBandit() {
-        super("Skeletal Bandit", 'b', 153,0,0, null);
+        super("Skeletal Bandit", 'b', 153,0,0);
         this.addWeaponToInventory(new Scimitar());
         this.addItemToInventory(new Rune(RandomNumberGenerator.getRandomInt(35,892)));
     }

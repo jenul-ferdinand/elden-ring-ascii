@@ -10,18 +10,20 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.enemies.type.Skeletal;
+import game.utils.Status;
 
 public class PileOfBones extends Skeletal {
     private int turnsPassed;
 
-    private Skeletal aliveVersion;
+    private Actor aliveVersion;
 
     /**
      * Constructor
      * @param aliveVersion
      */
-    public PileOfBones(Skeletal aliveVersion) {
-        super("Pile of Bones", 'x', 1,0,0, null);
+    public PileOfBones(Actor aliveVersion) {
+        super("Pile of Bones", 'x', 1,0,0);
+        this.removeCapability(Status.RESPAWNABLE);
         this.turnsPassed = 0;
 
         this.aliveVersion = aliveVersion;
@@ -74,7 +76,7 @@ public class PileOfBones extends Skeletal {
      * Get the alive version
      * @return Skeletal
      */
-    public Skeletal getAliveVersion() {
+    public Actor getAliveVersion() {
         return aliveVersion;
     }
 

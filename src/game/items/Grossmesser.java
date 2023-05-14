@@ -20,6 +20,4 @@ public class Grossmesser extends WeaponItem {
         return new AttackAction(target, "surrounding", this);
     }
 
-    @Override
-    public void tick(Location currentLocation, Actor actor) {}
 }

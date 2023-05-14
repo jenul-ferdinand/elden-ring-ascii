@@ -12,6 +12,7 @@ import game.enemies.HeavySkeletalSwordsman;
 import game.enemies.PileOfBones;
 import game.enemies.type.Skeletal;
 import game.items.Rune;
+import game.utils.Status;
 
 /**
  * An action executed if an actor is killed.
@@ -51,11 +52,11 @@ public class DeathAction extends Action {
         String result = "";
 
         ActionList dropActions = new ActionList();
-        if(target instanceof Skeletal && !(target instanceof PileOfBones)){
+        if(target instanceof Skeletal && target.hasCapability(Status.RESPAWNABLE)){
             Location pileLocation = map.locationOf(target);
             map.removeActor(target);
-            map.addActor(new PileOfBones((Skeletal) target), pileLocation);
-        }else{
+            map.addActor(new PileOfBones(target), pileLocation);
+        }else if(attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
             // drop all items
             for (Item item : target.getItemInventory())
                 if(!(item instanceof Rune)){
@@ -68,7 +69,9 @@ public class DeathAction extends Action {
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
-            // remove actor
+            map.removeActor(target);
+        } else {
+            //remove actor
             map.removeActor(target);
         }
 

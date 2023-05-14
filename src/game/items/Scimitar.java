@@ -18,7 +18,4 @@ public class Scimitar extends WeaponItem {
     public Action getSkill(Actor target, String direction) {
         return new AttackAction(target, "surrounding", this);
     }
-
-    @Override
-    public void tick(Location currentLocation, Actor actor) {}
 }

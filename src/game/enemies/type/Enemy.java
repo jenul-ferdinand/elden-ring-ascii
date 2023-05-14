@@ -26,8 +26,6 @@ public abstract class Enemy extends Actor {
     private int attackDamage;
     private int attackAccuracy;
 
-    private String specialSkill;
-
     protected Map<Integer, Behaviour> behaviours;
 
     /**
@@ -38,13 +36,11 @@ public abstract class Enemy extends Actor {
      * @param hitPoints      the Actor's starting hit points
      * @param attackDamage
      * @param attackAccuracy
-     * @param specialSkill
      */
-    public Enemy(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy, String specialSkill) {
+    public Enemy(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy) {
         super(name, displayChar, hitPoints);
         this.attackDamage = attackDamage;
         this.attackAccuracy = attackAccuracy;
-        this.specialSkill = specialSkill;
         this.behaviours = new HashMap<>();
         this.behaviours.put(996, new DespawnBehaviour());
         this.behaviours.put(997, new AttackBehaviour());
@@ -168,11 +164,4 @@ public abstract class Enemy extends Actor {
         }
     }
 
-    public String getSpecialSkill() {
-        return specialSkill;
-    }
-
-    public void setSpecialSkill(String specialSkill) {
-        this.specialSkill = specialSkill;
-    }
 }

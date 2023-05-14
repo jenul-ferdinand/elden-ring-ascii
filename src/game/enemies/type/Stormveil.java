@@ -1,8 +1,6 @@
 package game.enemies.type;
 
-import game.utils.Status;
-
-public abstract class Skeletal extends Enemy{
+public class Stormveil extends Enemy{
     /**
      * Constructor.
      *
@@ -12,8 +10,7 @@ public abstract class Skeletal extends Enemy{
      * @param attackDamage
      * @param attackAccuracy
      */
-    public Skeletal(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy) {
+    public Stormveil(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy) {
         super(name, displayChar, hitPoints, attackDamage, attackAccuracy);
-        this.addCapability(Status.RESPAWNABLE);
     }
 }

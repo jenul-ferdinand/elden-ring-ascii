@@ -9,7 +9,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.enemies.type.Enemy;
+import game.utils.Abilities;
 import game.utils.RandomNumberGenerator;
+import game.utils.Status;
 
 /**
  * An Action to attack another Actor.
@@ -87,12 +89,8 @@ public class AttackAction extends Action {
 
 		int damage = weapon.damage();
 
-		if (actor instanceof Enemy) {
-			Enemy Eactor = (Enemy) actor;
-			String specialSkill = Eactor.getSpecialSkill();
-			if (specialSkill == "AOE" && RandomNumberGenerator.getRandomInt(100)<50) {
-				direction = "surrounding";
-			}
+		if (actor.hasCapability(Abilities.AOE) && RandomNumberGenerator.getRandomInt(100)<50){
+			direction = "surrounding";
 		}
 		if(direction == "surrounding"){
 			for (Exit exit : map.locationOf(actor).getExits()){
