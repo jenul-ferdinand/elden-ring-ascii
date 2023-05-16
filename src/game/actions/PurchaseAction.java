@@ -6,7 +6,14 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Player;
+import game.items.RuneManager;
 
+/**
+ * Purchasing an item
+ * Created by: Jenul Ferdinand
+ * @author Jenul Ferdinand
+ * Modified by: Jenul Ferdinand
+ */
 public class PurchaseAction extends Action {
     /**
      * The Actor to give the item to
@@ -23,6 +30,11 @@ public class PurchaseAction extends Action {
      */
     private final int cost;
 
+    /**
+     *
+     */
+    private final RuneManager runeManager;
+
 
 
     /**
@@ -34,6 +46,8 @@ public class PurchaseAction extends Action {
         this.receiver = receiver;
         this.item = item;
         this.cost = cost;
+
+        this.runeManager = RuneManager.getRuneManager();
     }
 
 
@@ -46,17 +60,14 @@ public class PurchaseAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        // Downcast and store as player
-        Player player = (Player) actor;
-
-        // Check if the player has sufficient funds to purchase
-        if (player.getRunes() >= cost) {
+        // Check if the actor has enough runes
+        if (runeManager.getRunes(actor) >= cost) {
 
             // Add the item to the receiver's inventory
             actor.addWeaponToInventory((WeaponItem) item);
 
             // Deduct the cost from the player's runes balance
-            player.addRunes(-cost);
+            runeManager.subtractRunes(actor, cost);
 
             // Return confirmation message
             return "Purchased " + item + " for " + cost + " runes.";

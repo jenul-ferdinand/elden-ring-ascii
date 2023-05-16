@@ -4,29 +4,25 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Player;
-import game.items.Consumable;
-
+import game.items.Collectable;
 /**
  * Consumption of consumable items
  * Created by: Jenul Ferdinand
  * @author Jenul Ferdinand
  * Modified by: Jenul Ferdinand
  */
-public class ConsumeAction extends Action {
+public class RuneCollectAction extends Action {
     /**
-     * Variable to store our consumable item
+     *
      */
-    private Consumable consumable;
-
-
+    Collectable collectable;
 
     /**
      * Constructor
-     * @param consumable The consumable item
+     * @param collectable The collectable item
      */
-    public ConsumeAction(Consumable consumable) {
-        this.consumable = consumable;
+    public RuneCollectAction(Collectable collectable) {
+        this.collectable = collectable;
     }
 
 
@@ -40,13 +36,13 @@ public class ConsumeAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         // Consume the item and pass the actor
-        consumable.consumedBy(actor);
+        collectable.collectedBy(actor);
 
-        // Remove the item from the location of the ground
-        map.locationOf(actor).removeItem((Item) consumable);
+        // Remove the item from the ground
+        map.locationOf(actor).removeItem((Item) collectable);
 
         // Return the confirmation message
-        return actor + " consumes " + consumable;
+        return actor + " consumes " + collectable;
     }
 
 
@@ -58,6 +54,6 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return "✨ Consume " + consumable;
+        return "✨ Consume " + collectable;
     }
 }

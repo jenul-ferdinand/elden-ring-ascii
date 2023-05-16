@@ -10,6 +10,8 @@ public class HeavySkeletalSwordsman extends Skeletal {
      */
     public HeavySkeletalSwordsman() {
         super("Heavy Skeletal Swordsman", 'q', 153,0,0, null);
+
+        // Add Grossmesser to inventory
         this.addWeaponToInventory(new Grossmesser());
     }
 }

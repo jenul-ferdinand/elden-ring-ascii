@@ -2,31 +2,31 @@ package game;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.SellAction;
 import game.items.Club;
 import game.items.FlaskOfCrimsonTears;
+import game.items.RuneManager;
 import game.utils.Resettable;
 import game.utils.Status;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
  * It carries around a club to attack a hostile creature in the Lands Between.
- * Created by:
+ * Created by: Adrian Kristanto
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Jenul Ferdinand
  *
  */
-public class Player extends Actor implements Resettable {
-	private int runes = 0;
-	private int startingX;
-	private int startingY;
+public class Player extends edu.monash.fit2099.engine.actors.Actor implements Resettable {
+	private final int startingX;
+	private final int startingY;
 
 	private final Menu menu = new Menu();
+
+	private RuneManager runeManager;
 
 	/**
 	 * Constructor.
@@ -51,8 +51,11 @@ public class Player extends Actor implements Resettable {
 
 		// Add the Flask of Crimson Tears to the inventory
 		this.addItemToInventory(new FlaskOfCrimsonTears());
-	}
 
+		// RuneManager initialisation
+		this.runeManager = RuneManager.getRuneManager();
+		runeManager.setRunes(this, 0 );
+	}
 
 	public int getStartingX() {
 		return startingX;
@@ -60,14 +63,6 @@ public class Player extends Actor implements Resettable {
 
 	public int getStartingY() {
 		return startingY;
-	}
-
-	public void addRunes(int amount) {
-		this.runes += amount;
-	}
-
-	public int getRunes() {
-		return runes;
 	}
 
 	@Override
@@ -81,7 +76,7 @@ public class Player extends Actor implements Resettable {
 		display.println(ANSI_RED + "HP: " + printHp() + ANSI_RESET);
 
 		// Print the Runes balance in green
-		display.println(ANSI_YELLOW + "Runes: " + runes + ANSI_RESET);
+		display.println(ANSI_YELLOW + "Runes: " + RuneManager.getRuneManager().getRunes(this) + ANSI_RESET);
 
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
@@ -106,7 +101,7 @@ public class Player extends Actor implements Resettable {
 	}
 
 
-	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+	public ActionList allowableActions(edu.monash.fit2099.engine.actors.Actor otherActor, String direction, GameMap map) {
 		// Create a new list of actions
 		ActionList actions = new ActionList();
 

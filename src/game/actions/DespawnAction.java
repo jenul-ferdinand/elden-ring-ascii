@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 
 /**
- * The DespawnAction class represents an Action executed when an actor is despawned.
+ *  The DespawnAction class represents an Action executed when an actor is despawned.
  *  Created by: Ruilin
  *  Modified by: Ruilin
  *  @see Action

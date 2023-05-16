@@ -18,6 +18,8 @@ public class GiantCrayfish extends Sea {
      */
     public GiantCrayfish() {
         super("Giant Crayfish", 'R', 4803,527,100, "AOE");
+
+        // Add Rune to inventory
         this.addItemToInventory(new Rune(RandomNumberGenerator.getRandomInt(500,2374)));
     }
 

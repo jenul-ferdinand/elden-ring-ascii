@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class MerchantKale extends Trader {
 
     /**
-     * A list for the items in the merhant's inventory
+     * A list for the items in the merchant's inventory
      */
     private final ArrayList<Item> inventory = new ArrayList<>();
 
@@ -38,7 +38,6 @@ public class MerchantKale extends Trader {
      * Constructor.
      */
     public MerchantKale() {
-
         // Superclass attributes
         super("Merchant Kale", 'K', 999);
 

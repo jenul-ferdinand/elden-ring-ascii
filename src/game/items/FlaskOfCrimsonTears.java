@@ -1,10 +1,17 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.Player;
 import game.actions.ConsumeAction;
 
+/**
+ * Flask of Crimson Tears
+ * This item can be consumed by an actor, and it will heal them once consumed. The item has a max capacity of 2 uses.
+ * Created by: Jenul Ferdinand
+ * @author Jenul Ferdinand
+ * Modified by: Jenul Ferdinand
+ */
 public class FlaskOfCrimsonTears extends Item implements Consumable {
     /**
      * The capacity of the item
@@ -47,13 +54,13 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
 
     /**
      * When consumed the player will gain health
-     * @param player The player
+     * @param actor Actor to buff health
      */
     @Override
-    public void consumedBy(Player player) {
+    public void consumedBy(Actor actor) {
 
         // Heal the player
-        player.heal(healingPower);
+        actor.heal(healingPower);
 
         // Decrement the capacity
         capacity--;
@@ -67,7 +74,7 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
             togglePortability();
 
             // Drop this item
-            getDropAction(player);
+            getDropAction(actor);
 
             // Make it non-portable again, so we can't pick it up
             togglePortability();

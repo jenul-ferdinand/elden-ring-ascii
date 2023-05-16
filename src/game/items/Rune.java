@@ -1,11 +1,11 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.Player;
-import game.actions.ConsumeAction;
+import game.actions.RuneCollectAction;
 
-public class Rune extends Item implements Consumable {
+public class Rune extends Item implements Collectable {
     /**
      * The value of the rune
      */
@@ -14,8 +14,12 @@ public class Rune extends Item implements Consumable {
     /**
      * This will store out ConsumeAction
      */
-    private Action consumeAction;
+    private Action collectAction;
 
+    /**
+     * The singleton RuneManager
+     */
+    private RuneManager runeManager;
 
 
     /**
@@ -31,30 +35,27 @@ public class Rune extends Item implements Consumable {
         this.value = value;
 
         // Add the ConsumeAction
-        consumeAction = new ConsumeAction(this);
-        this.addAction(consumeAction);
+        collectAction = new RuneCollectAction(this);
+        this.addAction(collectAction);
+
+        // Get the singleton instance of the RuneManager
+        runeManager = RuneManager.getRuneManager();
     }
 
 
 
     /**
      * When called the Rune value will be added to the player's runes balance
-     * @param player The player
+     * @param collector The Actor class that will collect the item
      */
     @Override
-    public void consumedBy(Player player) {
+    public void collectedBy(Actor collector) {
+        // The runes will be added to the collectors balance
+        runeManager.addRunes(collector, value);
 
-        // Set the runes value for the player
-        player.addRunes(value);
+        // Remove the action
+        this.removeAction(collectAction);
 
-        // Remove the ConsumeAction
-        this.removeAction(consumeAction);
-
-        // Drop the item
-        this.getDropAction(player);
-
-        // Make it not portable (delete)
-        this.togglePortability();
 
     }
 }

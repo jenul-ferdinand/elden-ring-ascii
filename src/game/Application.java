@@ -14,6 +14,7 @@ import game.environments.Graveyard;
 import game.environments.GustOfWind;
 import game.environments.PuddleOfWater;
 import game.items.Rune;
+import game.items.RuneManager;
 import game.traders.MerchantKale;
 import game.utils.FancyMessage;
 
