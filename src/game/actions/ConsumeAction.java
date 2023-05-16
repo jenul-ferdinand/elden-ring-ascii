@@ -8,7 +8,7 @@ import game.Player;
 import game.items.Consumable;
 
 /**
- * Consumption of consumable items
+ * Consumption of consumable items.
  * Created by: Jenul Ferdinand
  * @author Jenul Ferdinand
  * Modified by: Jenul Ferdinand

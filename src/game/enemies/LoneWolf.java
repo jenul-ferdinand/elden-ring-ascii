@@ -11,7 +11,6 @@ import game.utils.Status;
 
 /**
  * BEHOLD, DOG!
- *
  * Created by:
  * @author Adrian Kristanto
  * Modified by:
@@ -27,7 +26,7 @@ public class LoneWolf extends Land {
 
     /**
      * The default weapon of the enemy
-     * @return
+     * @return IntrinsicWeapon
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {

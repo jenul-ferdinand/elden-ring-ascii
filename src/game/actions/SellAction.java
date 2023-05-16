@@ -5,10 +5,18 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Player;
 import game.items.RuneManager;
 
+/**
+ * Selling an Item.
+ * Created by: Jenul Ferdinand
+ * @author Jenul Ferdinand
+ * Modified by: Jenul Ferdinand
+ */
 public class SellAction extends Action {
+
+
+
     /**
      * The item being sold
      */
@@ -19,7 +27,13 @@ public class SellAction extends Action {
      */
     private final int profit;
 
+
+    /**
+     * The singleton instance of the RuneManager
+     */
     private final RuneManager runeManager;
+
+
 
     /**
      * Constructor
@@ -31,6 +45,8 @@ public class SellAction extends Action {
         this.profit = profit;
         this.runeManager = RuneManager.getRuneManager();
     }
+
+
 
     /**
      * The player will receive the amount of profit to their balance
@@ -49,6 +65,8 @@ public class SellAction extends Action {
         // Return the confirmation message
         return "The player sold " + item + " for " + profit + " Runes";
     }
+
+
 
     /**
      * The menu option description

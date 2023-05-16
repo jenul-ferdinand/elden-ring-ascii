@@ -3,12 +3,11 @@ package game.items;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 
 /**
- * Flask of Crimson Tears
- * This item can be consumed by an actor, and it will heal them once consumed. The item has a max capacity of 2 uses.
+ * Flask of Crimson Tears.
+ * This item the player starts of with, and has a specific capacity
  * Created by: Jenul Ferdinand
  * @author Jenul Ferdinand
  * Modified by: Jenul Ferdinand

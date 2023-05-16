@@ -9,7 +9,7 @@ import game.Player;
 import game.items.RuneManager;
 
 /**
- * Purchasing an item
+ * Purchasing an item.
  * Created by: Jenul Ferdinand
  * @author Jenul Ferdinand
  * Modified by: Jenul Ferdinand

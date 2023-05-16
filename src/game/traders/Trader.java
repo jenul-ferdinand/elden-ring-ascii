@@ -5,6 +5,13 @@ import edu.monash.fit2099.engine.items.Item;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Parent class Trader.
+ * Manages the storing of items and their specific values
+ * Created by: Jenul Ferdinand
+ * @author Jenul Ferdinand
+ * Modified by: Jenul Ferdinand
+ */
 public abstract class Trader extends Actor {
 
 

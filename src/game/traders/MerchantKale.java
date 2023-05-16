@@ -14,6 +14,15 @@ import game.items.Grossmesser;
 import game.items.Scimitar;
 import game.utils.Status;
 
+
+
+/**
+ * The first trader the player encounters.
+ * This trader buys and sells weapons to trade capable Actors.
+ * Created by: Jenul Ferdinand
+ * @author Jenul Ferdinand
+ * Modified by: Jenul Ferdinand
+ */
 public class MerchantKale extends Trader {
 
 

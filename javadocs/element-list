@@ -1,10 +1,3 @@
-edu.monash.fit2099.demo.conwayslife
-edu.monash.fit2099.demo.mars
-edu.monash.fit2099.demo.mars.actions
-edu.monash.fit2099.demo.mars.actors
-edu.monash.fit2099.demo.mars.behaviours
-edu.monash.fit2099.demo.mars.grounds
-edu.monash.fit2099.demo.mars.items
 edu.monash.fit2099.engine.actions
 edu.monash.fit2099.engine.actors
 edu.monash.fit2099.engine.capabilities
@@ -15,7 +8,10 @@ edu.monash.fit2099.engine.weapons
 game
 game.actions
 game.behaviour
+game.defaultGrounds
 game.enemies
+game.enemies.type
 game.environments
 game.items
+game.traders
 game.utils

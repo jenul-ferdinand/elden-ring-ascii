@@ -5,6 +5,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.Collectable;
+
+
+
 /**
  * Consumption of consumable items
  * Created by: Jenul Ferdinand
@@ -12,10 +15,15 @@ import game.items.Collectable;
  * Modified by: Jenul Ferdinand
  */
 public class RuneCollectAction extends Action {
+
+
+
     /**
      *
      */
     Collectable collectable;
+
+
 
     /**
      * Constructor

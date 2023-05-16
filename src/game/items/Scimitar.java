@@ -7,6 +7,9 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
 
 public class Scimitar extends WeaponItem {
+
+
+
     /**
      * Constructor
      */
@@ -21,4 +24,7 @@ public class Scimitar extends WeaponItem {
 
     @Override
     public void tick(Location currentLocation, Actor actor) {}
+
+
+
 }

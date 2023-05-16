@@ -8,6 +8,9 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
 
 public class Grossmesser extends WeaponItem {
+
+
+
     /**
      * Constructor
      */
@@ -22,4 +25,7 @@ public class Grossmesser extends WeaponItem {
 
     @Override
     public void tick(Location currentLocation, Actor actor) {}
+
+
+
 }

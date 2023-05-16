@@ -5,6 +5,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.RuneCollectAction;
 
+
+/**
+ * This is the item form of the game's currency.
+ * Created by: Jenul Ferdinand
+ * @author Jenul Ferdinand
+ * Modified by: Jenul Ferdinand
+ */
 public class Rune extends Item implements Collectable {
     /**
      * The value of the rune
@@ -20,6 +27,7 @@ public class Rune extends Item implements Collectable {
      * The singleton RuneManager
      */
     private RuneManager runeManager;
+
 
 
     /**
@@ -40,6 +48,7 @@ public class Rune extends Item implements Collectable {
 
         // Get the singleton instance of the RuneManager
         runeManager = RuneManager.getRuneManager();
+
     }
 
 
@@ -50,12 +59,12 @@ public class Rune extends Item implements Collectable {
      */
     @Override
     public void collectedBy(Actor collector) {
+
         // The runes will be added to the collectors balance
         runeManager.addRunes(collector, value);
 
         // Remove the action
         this.removeAction(collectAction);
-
 
     }
 }
