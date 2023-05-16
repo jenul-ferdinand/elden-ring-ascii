@@ -12,4 +12,5 @@ public class HeavyCrossbow extends WeaponItem {
         super("Heavy Crossbow", '}', 64, "bonks", 57);
         this.addCapability(Abilities.LONGRANGE);
     }
+    //overide tick to addaction then it will give to the player
 }

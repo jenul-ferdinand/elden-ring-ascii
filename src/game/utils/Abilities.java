@@ -8,5 +8,4 @@ package game.utils;
 public enum Abilities {
     AOE,
     LONGRANGE
-
 }
