@@ -10,27 +10,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.items.Club;
+import game.items.Grossmesser;
 import game.items.Scimitar;
 import game.utils.Status;
 
-import java.util.ArrayList;
-
 public class MerchantKale extends Trader {
-
-    /**
-     * A list for the items in the merchant's inventory
-     */
-    private final ArrayList<Item> inventory = new ArrayList<>();
-
-    /**
-     * A list for the prices that the merchant will sell for
-     */
-    private final ArrayList<Integer> sellPrices = new ArrayList<>();
-
-    /**
-     * A list for the prices that the merchant will buy for
-     */
-    private final ArrayList<Integer> buyPrices = new ArrayList<>();
 
 
 
@@ -41,15 +25,10 @@ public class MerchantKale extends Trader {
         // Superclass attributes
         super("Merchant Kale", 'K', 999);
 
-        // Initial Inventory
-        // Club
-        this.inventory.add(new Club());
-        this.sellPrices.add(600);
-
-        // Scimitar
-        this.inventory.add(new Scimitar());
-        this.sellPrices.add(600);
-
+        // Initialise the items we have
+        initItem(new Club(), 10, 150, DealType.BOTH);
+        initItem(new Scimitar(), 600, 100, DealType.BOTH);
+        initItem(new Grossmesser(), 0, 100, DealType.BUYING);
     }
 
 
@@ -85,33 +64,39 @@ public class MerchantKale extends Trader {
         // Create a new list of actions
         ActionList actions = new ActionList();
 
-        // If the other actor has capability HOSTILE_TO_ENEMY, assuming this is the player.
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+        // Check if the other actor has the capability to trade with us
+        if(otherActor.hasCapability(Status.TRADE_CAPABLE)) {
 
-            // Purchasing
-            for (int i = 0; i < inventory.size(); i++) {
+            // ==== SELLING TO ACTOR ====
+            // Loop through the items of the items map
+            for (Item item : items.keySet()) {
 
-                // Add the purchase action to the action list
-                actions.add(new PurchaseAction(otherActor, inventory.get(i), sellPrices.get(i)));
+                // Check if the current item is up for sale
+                if (getDealType(item) == DealType.SELLING.ordinal() || getDealType(item) == DealType.BOTH.ordinal()) {
 
-            }
-
-
-            // Selling
-            for (int k = 0; k < otherActor.getWeaponInventory().size(); k++) {
-
-                // Weapon item
-                Item weaponItem = otherActor.getWeaponInventory().get(k);
-
-                // Switch for weapon buying prices
-                switch (weaponItem.toString()) {
-                    case "Club", "Grossmesser", "Scimitar" -> buyPrices.add(100);
+                    // Add the purchase action for that item
+                    actions.add(new PurchaseAction(otherActor, item, getSellingPrice(item)));
                 }
 
-                // Add the sell action to the actions list
-                actions.add(new SellAction(weaponItem, buyPrices.get(k)));
-
             }
+
+            // ==== BUYING FROM ACTOR ====
+            // Loop through other actor's weapons
+            for (Item weaponItem : otherActor.getWeaponInventory())  {
+                // Loop through our items
+                for (Item item : items.keySet()) {
+
+                    // Check if the name's of both items are the same
+                    if (item.toString() == weaponItem.toString()) {
+
+                        // Add the sell action to the actions list
+                        actions.add(new SellAction(weaponItem, getBuyingPrice(item)));
+
+                    }
+
+                }
+            }
+
 
         }
 

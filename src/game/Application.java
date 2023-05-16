@@ -13,8 +13,10 @@ import game.defaultGrounds.Wall;
 import game.environments.Graveyard;
 import game.environments.GustOfWind;
 import game.environments.PuddleOfWater;
+import game.items.Grossmesser;
 import game.items.Rune;
 import game.items.RuneManager;
+import game.items.Scimitar;
 import game.traders.MerchantKale;
 import game.utils.FancyMessage;
 
@@ -83,10 +85,14 @@ public class Application {
 		gameMap.at(38, 15).addItem(new Rune(100));
 		gameMap.at(38, 16).addItem(new Rune(100));
 
+		// Create Weapons for testing
+		gameMap.at(36, 11).addItem(new Grossmesser());
+		gameMap.at(36, 12).addItem(new Scimitar());
+
 		// Create a Player
 		Player player = new Player("Tarnished", '@', 300);
 		// Add the Player to the World
-		world.addPlayer(player, gameMap.at(player.getStartingX(), player.getStartingY()));
+		world.addPlayer(player, gameMap.at(38, 9));
 
 
 		// Start the World game loop

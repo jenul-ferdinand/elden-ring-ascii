@@ -21,16 +21,23 @@ import game.utils.Status;
  *
  */
 public class Player extends edu.monash.fit2099.engine.actors.Actor implements Resettable {
-	private final int startingX;
-	private final int startingY;
 
-	private final Menu menu = new Menu();
 
-	private RuneManager runeManager;
 
 	/**
-	 * Constructor.
-	 *
+	 * Create and store an instance of the menu
+	 */
+	private final Menu menu = new Menu();
+
+	/**
+	 * To store the singleton instance of the RuneManager
+	 */
+	private RuneManager runeManager;
+
+
+
+	/**
+	 * Constructor
 	 * @param name        Name to call the player in the UI
 	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
@@ -39,12 +46,10 @@ public class Player extends edu.monash.fit2099.engine.actors.Actor implements Re
 		// Super class attributes
 		super(name, displayChar, hitPoints);
 
-		// Starting location
-		this.startingX = 38;
-		this.startingY = 9;
-
-		// Capability that the player is hostile to enemies
+		// Hostile to enemies
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		// Can trade with traders
+		this.addCapability(Status.TRADE_CAPABLE);
 
 		// Add the Club to the weapon inventory
 		this.addWeaponToInventory(new Club());
@@ -54,17 +59,20 @@ public class Player extends edu.monash.fit2099.engine.actors.Actor implements Re
 
 		// RuneManager initialisation
 		this.runeManager = RuneManager.getRuneManager();
+		// Set the initial runes to zero
 		runeManager.setRunes(this, 0 );
 	}
 
-	public int getStartingX() {
-		return startingX;
-	}
 
-	public int getStartingY() {
-		return startingY;
-	}
 
+	/**
+	 * Handles the console each turn
+	 * @param actions    collection of possible Actions for this Actor
+	 * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+	 * @param map        the map containing the Actor
+	 * @param display    the I/O object to which messages may be written
+	 * @return Action - Returns the action the player has chosen from the menu
+	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		// Colours as variables
@@ -86,10 +94,17 @@ public class Player extends edu.monash.fit2099.engine.actors.Actor implements Re
 		return menu.showMenu(this, actions, display);
 	}
 
+
+
+	/**
+	 * Game reset handling
+	 */
 	@Override
 	public void reset() {
 
 	}
+
+
 
 	/**
 	 * The default weapon
@@ -101,10 +116,5 @@ public class Player extends edu.monash.fit2099.engine.actors.Actor implements Re
 	}
 
 
-	public ActionList allowableActions(edu.monash.fit2099.engine.actors.Actor otherActor, String direction, GameMap map) {
-		// Create a new list of actions
-		ActionList actions = new ActionList();
 
-		return actions;
-	}
 }

@@ -3,6 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 
 /**
@@ -19,14 +20,19 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
     private int capacity;
 
     /**
+     * Stores the initial capacity
+     */
+    private final int initialCapacity;
+
+    /**
      * How much health we will gain once consumed
      */
-    private int healingPower;
+    private final int healingPower;
 
     /**
      * This will hold our ConsumeAction
      */
-    private Action consumeAction;
+    private final Action consumeAction;
 
 
 
@@ -34,12 +40,14 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
      * Constructor
      */
     public FlaskOfCrimsonTears() {
-
         // Super class attributes
         super("Flask of Crimson Tears", '+', false);
 
         // Max capacity of 2 uses
         this.capacity = 2;
+
+        // Set the initial capacity
+        this.initialCapacity = capacity;
 
         // The player will gain 250 HP once consumed
         this.healingPower = 250;
@@ -80,8 +88,11 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
             togglePortability();
         }
 
+
     }
 
-
-
+    @Override
+    public String toString() {
+        return super.toString() + " (" + capacity + "/" + initialCapacity + ")";
+    }
 }
