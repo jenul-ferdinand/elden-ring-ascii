@@ -79,19 +79,7 @@ public class MoveActorAction extends Action {
 	 */
 	@Override
 	public String menuDescription(Actor actor) {
-		switch (direction) {
-			case "North": return "⬆️ " + actor + " moves " + direction;
-			case "North-East": return "↗️ " + actor + " moves " + direction;
-			case "East": return "➡️ " + actor + " moves " + direction;
-			case "South-East": return "↘️ " + actor + " moves " + direction;
-			case "South": return "⬇️ " + actor + " moves " + direction;
-			case "South-West": return "↙️ " + actor + " moves " + direction;
-			case "West": return "⬅️ " + actor + " moves " + direction;
-			case "North-West": return "↖️ " + actor + " moves " + direction;
-			case "around": return "👣 " + actor + " moves " + direction;
-		}
-
-		return "" + actor + " moves " + direction;
+		return actor + " moves " + direction;
 	}
 
 	/**

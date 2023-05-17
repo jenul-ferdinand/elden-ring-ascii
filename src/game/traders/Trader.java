@@ -72,7 +72,7 @@ public abstract class Trader extends Actor {
     /**
      * Gets the deal type of the item
      * @param item - Item to check
-     * @return Integer - Returns the third index of the ArrayList which is where the DealType is stored
+     * @return Integer - Returns the third index of the ArrayList which is where the DealType value is stored
      */
     public int getDealType(Item item) {
         return items.get(item).get(2);
