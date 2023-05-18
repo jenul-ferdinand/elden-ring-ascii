@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.AttackAOEAction;
 import game.actions.AttackAction;
 
 public class Scimitar extends WeaponItem {
@@ -16,6 +17,6 @@ public class Scimitar extends WeaponItem {
 
     @Override
     public Action getSkill(Actor target, String direction) {
-        return new AttackAction(target, "surrounding", this);
+        return new AttackAOEAction(target, this);
     }
 }

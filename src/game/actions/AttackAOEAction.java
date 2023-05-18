@@ -2,29 +2,54 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.utils.Abilities;
+import game.utils.RandomNumberGenerator;
 
-public class AttackAOEAction extends AttackAction {
+import java.util.Random;
+
+public class AttackAOEAction extends Action {
+    /**
+     * The Actor that is to be attacked
+     */
+    private Actor target;
+
+    /**
+     * The direction of incoming attack.
+     */
+    private String direction = "surrounding";
+
+    /**
+     * Weapon used for the attack
+     */
+    private Weapon weapon;
+
+    /**
+     * Random number generator
+     */
+    private Random rand = new Random();
+
     /**
      * Constructor for AttackAction with target, direction and weapon.
      *
      * @param target    the Actor to attack
-     * @param direction the direction where the attack should be performed (only used for display purposes)
-     * @param weapon    the weapon used for the attack
+     * @param weapon the weapon used for the attack
      */
-    public AttackAOEAction(Actor target, String direction, Weapon weapon) {
-        super(target, direction, weapon);
+    public AttackAOEAction(Actor target,Weapon weapon) {
+        this.target = target;
+        this.weapon = weapon;
     }
 
     /**
      * Constructor with intrinsic weapon as default
      *
-     * @param target    the actor to attack
-     * @param direction the direction where the attack should be performed (only used for display purposes)
+     * @param target the actor to attack
      */
-    public AttackAOEAction(Actor target, String direction) {
-        super(target, direction);
+    public AttackAOEAction(Actor target) {
+        this.target = target;
     }
 
     /**
@@ -36,7 +61,27 @@ public class AttackAOEAction extends AttackAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return null;
+        String result = "";
+        if (weapon == null) {
+            weapon = actor.getIntrinsicWeapon();
+        }
+        int damage = weapon.damage();
+        for (Exit exit : map.locationOf(actor).getExits()){
+            Location toAttack = exit.getDestination();
+            if (toAttack.containsAnActor()){
+                target = toAttack.getActor();
+                if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
+                    result += actor + " misses " + target + ".";
+                } else{
+                    target.hurt(damage);
+                    result += actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+                    if (!target.isConscious()) {
+                        result += new DeathAction(actor).execute(target, map) + "\r\n";
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -47,6 +92,6 @@ public class AttackAOEAction extends AttackAction {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return null;
+        return"⚔️ " + actor + " attacks " + target + " at " + direction + " with " + (weapon != null ? weapon : "Intrinsic Weapon");
     }
 }

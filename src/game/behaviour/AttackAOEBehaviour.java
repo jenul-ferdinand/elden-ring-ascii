@@ -6,11 +6,9 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAOEAction;
-import game.actions.AttackAction;
 import game.utils.Abilities;
 import game.utils.RandomNumberGenerator;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class AttackAOEBehaviour implements Behaviour {
@@ -40,14 +38,13 @@ public class AttackAOEBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        ArrayList<Action> actions = new ArrayList<>();
 //do surrounding check in action
         if (actor.hasCapability(Abilities.AOE) && RandomNumberGenerator.getRandomInt(100) < 50) {
             for (Exit exit : map.locationOf(actor).getExits()) {
                 Location toAttack = exit.getDestination();
                 if (toAttack.containsAnActor()) {
                     if (toAttack.getActor().getClass().getSuperclass() != actor.getClass().getSuperclass()) {
-                        return new AttackAOEAction(toAttack.getActor(), "surrounding");
+                        return new AttackAOEAction(toAttack.getActor());
                     }
                 }
             }

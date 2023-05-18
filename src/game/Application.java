@@ -186,6 +186,15 @@ public class Application {
 				exception.printStackTrace();
 			}
 		}
+		GoldenFogDoor goldenFogDoor1 = new GoldenFogDoor();
+		goldenFogDoor1.setLocation(roundtableHoldMap.at(5, 5));
+
+		GoldenFogDoor goldenFogDoor2 = new GoldenFogDoor();
+		goldenFogDoor2.setLocation(stormveilCastleMap.at(5, 5));
+		// Create Merchant Kale
+		limgraveMap.at(37, 10).setGround(goldenFogDoor1);
+		limgraveMap.at(39, 10).setGround(goldenFogDoor2);
+
 
 		// Create Merchant Kale
 		limgraveMap.at(40, 12).addActor(new MerchantKale());

@@ -42,7 +42,8 @@ public abstract class Enemy extends Actor {
         this.attackDamage = attackDamage;
         this.attackAccuracy = attackAccuracy;
         this.behaviours = new HashMap<>();
-        this.behaviours.put(996, new DespawnBehaviour());
+        this.behaviours.put(995, new DespawnBehaviour());
+        this.behaviours.put(996, new AttackAOEBehaviour());
         this.behaviours.put(997, new AttackBehaviour());
         this.behaviours.put(999, new WanderBehaviour());
     }

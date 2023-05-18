@@ -52,29 +52,32 @@ public class DeathAction extends Action {
         String result = "";
 
         ActionList dropActions = new ActionList();
-        if(target instanceof Skeletal && target.hasCapability(Status.RESPAWNABLE)){
+        if(target.hasCapability(Status.RESPAWNABLE)){
             Location pileLocation = map.locationOf(target);
             map.removeActor(target);
             map.addActor(new PileOfBones(target), pileLocation);
         }else if(attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
             // drop all items
-            for (Item item : target.getItemInventory())
-                if(!(item instanceof Rune)){
-                    dropActions.add(item.getDropAction(target));
-                } else if(attacker instanceof Player){
-                    dropActions.add(item.getDropAction(target));
-                }
+            for (Item item : target.getItemInventory()){
+                dropActions.add(item.getDropAction(target));
+            }
+//                if(!(item instanceof Rune)){
+//                    dropActions.add(item.getDropAction(target));
+//                } else if(attacker instanceof Player){
+
+
 
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
-            map.removeActor(target);
-        } else {
-            //remove actor
-            map.removeActor(target);
         }
 
+//        if(target.hasCapability(Status.HOSTILE_TO_ENEMY){
+//            //manage runes
+//        }
+
+        map.removeActor(target);
         result += System.lineSeparator() + menuDescription(target);
         return result;
     }
