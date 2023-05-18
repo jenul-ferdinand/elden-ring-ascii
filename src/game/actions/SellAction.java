@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.items.RuneManager;
+import game.traders.Trader;
 
 /**
  * Selling an Item.
@@ -14,19 +15,30 @@ import game.items.RuneManager;
  * Modified by: Jenul Ferdinand
  */
 public class SellAction extends Action {
-
-
-
     /**
      * The item being sold
      */
-    private final Item item;
+    private Item item;
+
+    /**
+     * The weapon being sold
+     */
+    private WeaponItem weapon;
+
+    /**
+     * The name of the weapon or item
+     */
+    private String name;
 
     /**
      * The profit of the sale
      */
     private final int profit;
 
+    /**
+     * The instance of the Trader
+     */
+    private final Trader trader;
 
     /**
      * The singleton instance of the RuneManager
@@ -40,10 +52,22 @@ public class SellAction extends Action {
      * @param item The item being sold
      * @param profit The profit of the sale
      */
-    public SellAction(Item item, int profit) {
+    public SellAction(Item item, int profit, Trader trader) {
         this.item = item;
         this.profit = profit;
+        this.trader = trader;
         this.runeManager = RuneManager.getRuneManager();
+
+        this.name = item.toString();
+    }
+
+    public SellAction(WeaponItem weapon, int profit, Trader trader) {
+        this.weapon = weapon;
+        this.profit = profit;
+        this.trader = trader;
+        this.runeManager = RuneManager.getRuneManager();
+
+        this.name = weapon.toString();
     }
 
 
@@ -56,14 +80,17 @@ public class SellAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        // Add the profit of the sale to the player's balance
+        // Add the profit
         runeManager.addRunes(actor, profit);
 
-        // Remove the weapon item from the inventory of the player
-        actor.removeWeaponFromInventory((WeaponItem) item);
+        // Remove the weapon
+        if (weapon != null) actor.removeWeaponFromInventory(weapon);
 
-        // Return the confirmation message
-        return "The player sold " + item + " for " + profit + " Runes";
+        // Remove the item
+        if (item != null) actor.removeItemFromInventory(item);
+
+        // Confirmation message
+        return "The player sold " + name + " for " + profit + " Runes";
     }
 
 
@@ -75,6 +102,6 @@ public class SellAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return "💲 Sell " + item + " to MerchantKale for " + profit + " Runes";
+        return "💲 Sell " + name + " to " + trader.toString() + " for " + profit + " Runes";
     }
 }

@@ -23,7 +23,17 @@ public class PurchaseAction extends Action {
     /**
      * Item to purchase
      */
-    private final Item item;
+    private Item item;
+
+    /**
+     * Weapon to purchase
+     */
+    private WeaponItem weapon;
+
+    /**
+     * The name of the item/weapon
+     */
+    private final String name;
 
     /**
      * Cost of the item
@@ -38,16 +48,35 @@ public class PurchaseAction extends Action {
 
 
     /**
-     * Constructor
-     * @param receiver The recipient of the item
-     * @param item The item to be sold
+     * Constructor for item
+     * @param item - The item being sold
+     * @param cost - The cost of the item
      */
-    public PurchaseAction(Actor receiver, Item item, int cost) {
-        this.receiver = receiver;
+    public PurchaseAction(Item item, int cost) {
         this.item = item;
         this.cost = cost;
 
+        // Get the singleton instance of the RuneManager
         this.runeManager = RuneManager.getRuneManager();
+
+        // Store the name of the item
+        this.name = item.toString();
+    }
+
+    /**
+     * Constructor for weapon
+     * @param weapon - The weapon being sold
+     * @param cost - The cost of the item
+     */
+    public PurchaseAction(WeaponItem weapon, int cost) {
+        this.weapon = weapon;
+        this.cost = cost;
+
+        // Get the singleton instance of the RuneManager
+        this.runeManager = RuneManager.getRuneManager();
+
+        // Store the name of the weapon
+        this.name = weapon.toString();
     }
 
 
@@ -60,20 +89,23 @@ public class PurchaseAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        // Check if the actor has enough runes
+        // Check if actor can afford the item
         if (runeManager.getRunes(actor) >= cost) {
 
-            // Add the item to the receiver's inventory
-            actor.addWeaponToInventory((WeaponItem) item);
+            // Give the weapon to actor
+            if (weapon != null) actor.addWeaponToInventory(weapon);
 
-            // Deduct the cost from the player's runes balance
+            // Give the item to actor
+            if (item != null) actor.addItemToInventory(item);
+
+            // Subtract runes from actor
             runeManager.subtractRunes(actor, cost);
 
-            // Return confirmation message
+            // Confirmation message
             return "Purchased " + item + " for " + cost + " runes.";
         }
 
-        // Return if the player is too broke
+        // Failure message
         return "Insufficient Balance";
     }
 
@@ -86,6 +118,6 @@ public class PurchaseAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return "🛒 Purchase " + item + " from Trader for " + cost + " runes";
+        return "🛒 Purchase " + name + " from Trader for " + cost + " runes";
     }
 }

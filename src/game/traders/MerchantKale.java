@@ -34,10 +34,10 @@ public class MerchantKale extends Trader {
         // Superclass attributes
         super("Merchant Kale", 'K', 999);
 
-        // Initialise the items we have
-        initItem(new Club(), 10, 150, DealType.BOTH);
-        initItem(new Scimitar(), 600, 100, DealType.BOTH);
-        initItem(new Grossmesser(), 0, 100, DealType.BUYING);
+        // Weapons
+        initWeapon(new Club(),          600,    100,    DealType.BOTH);
+        initWeapon(new Scimitar(),      600,    100,    DealType.BOTH);
+        initWeapon(new Grossmesser(),   0,      100,    DealType.BUYING);
     }
 
 
@@ -57,62 +57,4 @@ public class MerchantKale extends Trader {
         return new DoNothingAction();
 
     }
-
-
-
-    /**
-     * Merchant actions
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return ActionList Returns the list of actions
-     */
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-
-        // Create a new list of actions
-        ActionList actions = new ActionList();
-
-        // Check if the other actor has the capability to trade with us
-        if(otherActor.hasCapability(Status.TRADE_CAPABLE)) {
-
-            // ==== SELLING TO ACTOR ====
-            // Loop through the items of the items map
-            for (Item item : items.keySet()) {
-
-                // Check if the current item is up for sale
-                if (getDealType(item) == DealType.SELLING.ordinal() || getDealType(item) == DealType.BOTH.ordinal()) {
-
-                    // Add the purchase action for that item
-                    actions.add(new PurchaseAction(otherActor, item, getSellingPrice(item)));
-                }
-
-            }
-
-            // ==== BUYING FROM ACTOR ====
-            // Loop through other actor's weapons
-            for (Item weaponItem : otherActor.getWeaponInventory())  {
-                // Loop through our items
-                for (Item item : items.keySet()) {
-
-                    // Check if the name's of both items are the same
-                    if (item.toString() == weaponItem.toString()) {
-
-                        // Add the sell action to the actions list
-                        actions.add(new SellAction(weaponItem, getBuyingPrice(item)));
-
-                    }
-
-                }
-            }
-
-
-        }
-
-        // Return the action list
-        return actions;
-    }
-
-
-
 }

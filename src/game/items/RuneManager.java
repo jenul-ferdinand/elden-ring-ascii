@@ -11,9 +11,6 @@ import java.util.HashMap;
  * Modified by: Jenul Ferdinand
  */
 public class RuneManager {
-
-
-
     /**
      * Stores the data for Actor as the key and Integer as the value
      */

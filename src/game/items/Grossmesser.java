@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
+import game.utils.Status;
 
 public class Grossmesser extends WeaponItem {
 
@@ -16,6 +17,8 @@ public class Grossmesser extends WeaponItem {
      */
     public Grossmesser() {
         super("Grossmesser", '?', 115, "bonks", 85);
+
+        this.addCapability(Status.WEAPON);
     }
 
     @Override
