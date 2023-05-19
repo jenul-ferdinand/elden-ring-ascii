@@ -35,9 +35,10 @@ public class TradeAction extends Action {
     private final String str;
 
 
-
     /**
-     * Constructor
+     * Constructor for Item
+     * @param itemToTrade - The Item we are giving
+     * @param itemToReceive - The Item we are receiving
      */
     public TradeAction(Item itemToTrade, Item itemToReceive) {
         this.itemToTrade = itemToTrade;
@@ -46,6 +47,11 @@ public class TradeAction extends Action {
         str = itemToReceive.toString();
     }
 
+    /**
+     * Constructor for WeaponItem
+     * @param itemToTrade - The Item we are giving
+     * @param weaponToReceive - The WeaponItem we are receiving
+     */
     public TradeAction(Item itemToTrade, WeaponItem weaponToReceive) {
         this.itemToTrade = itemToTrade;
         this.weaponToReceive = weaponToReceive;

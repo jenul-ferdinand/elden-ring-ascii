@@ -17,8 +17,6 @@ public class Grossmesser extends WeaponItem {
      */
     public Grossmesser() {
         super("Grossmesser", '?', 115, "bonks", 85);
-
-        this.addCapability(Status.WEAPON);
     }
 
     @Override

@@ -22,8 +22,6 @@ public class AxeOfGodrick extends WeaponItem {
      */
     public AxeOfGodrick() {
         super("Axe of Godrick", 'T', 142, "slashes", 84);
-
-        this.addCapability(Status.WEAPON);
     }
 
 

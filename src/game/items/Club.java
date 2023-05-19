@@ -23,8 +23,6 @@ public class Club extends WeaponItem {
      */
     public Club() {
         super("Club", '!', 103, "bonks", 80);
-
-        this.addCapability(Status.WEAPON);
     }
 
 

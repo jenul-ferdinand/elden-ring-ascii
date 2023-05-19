@@ -48,9 +48,10 @@ public class SellAction extends Action {
 
 
     /**
-     * Constructor
-     * @param item The item being sold
-     * @param profit The profit of the sale
+     * Constructor for Item
+     * @param item - The Item being sold
+     * @param profit - The profit of the sale
+     * @param trader - The Trader being sold to
      */
     public SellAction(Item item, int profit, Trader trader) {
         this.item = item;
@@ -61,6 +62,12 @@ public class SellAction extends Action {
         this.name = item.toString();
     }
 
+    /**
+     * Constructor for WeaponItem
+     * @param weapon - The WeaponItem being sold
+     * @param profit - The profit of the sale
+     * @param trader - The Trader being sold to
+     */
     public SellAction(WeaponItem weapon, int profit, Trader trader) {
         this.weapon = weapon;
         this.profit = profit;

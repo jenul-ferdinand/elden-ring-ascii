@@ -16,8 +16,6 @@ public class Scimitar extends WeaponItem {
      */
     public Scimitar() {
         super("Scimitar", 's', 118, "bonks", 88);
-
-        this.addCapability(Status.WEAPON);
     }
 
     @Override

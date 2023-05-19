@@ -13,10 +13,7 @@ import game.defaultGrounds.Wall;
 import game.environments.Graveyard;
 import game.environments.GustOfWind;
 import game.environments.PuddleOfWater;
-import game.items.Grossmesser;
-import game.items.RemembranceOfTheGrafted;
-import game.items.Rune;
-import game.items.Scimitar;
+import game.items.*;
 import game.traders.FingerReaderEnia;
 import game.traders.MerchantKale;
 import game.utils.FancyMessage;
@@ -93,6 +90,7 @@ public class Application {
 		// Rune for testing
 		gameMap.at(38, 15).addItem(new Rune(100));
 		gameMap.at(38, 16).addItem(new Rune(100));
+		gameMap.at(38,17).addItem(new GoldenRune());
 
 		// Weapons for testing
 		gameMap.at(36, 11).addItem(new Grossmesser());

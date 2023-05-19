@@ -10,5 +10,5 @@ public enum Status {
     RESPAWNABLE,
     RESTING,
     TRADE_CAPABLE,
-    WEAPON,
+    IN_INVENTORY,
 }

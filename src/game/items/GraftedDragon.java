@@ -22,8 +22,6 @@ public class GraftedDragon extends WeaponItem {
      */
     public GraftedDragon() {
         super("Grafted Dragon", 'N', 89, "bites", 90);
-
-        this.addCapability(Status.WEAPON);
     }
 
 

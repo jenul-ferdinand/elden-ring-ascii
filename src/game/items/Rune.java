@@ -3,7 +3,10 @@ package game.items;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.actions.RuneCollectAction;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import game.actions.ConsumeAction;
+import game.utils.Status;
 
 
 /**
@@ -12,22 +15,21 @@ import game.actions.RuneCollectAction;
  * @author Jenul Ferdinand
  * Modified by: Jenul Ferdinand
  */
-public class Rune extends Item implements Collectable {
+public class Rune extends Item implements Consumable {
     /**
      * The value of the rune
      */
-    private int value;
+    private final int value;
 
     /**
      * This will store out ConsumeAction
      */
-    private Action collectAction;
+    private final Action consumeAction;
 
     /**
      * The singleton RuneManager
      */
-    private RuneManager runeManager;
-
+    private final RuneManager runeManager;
 
 
     /**
@@ -37,14 +39,14 @@ public class Rune extends Item implements Collectable {
     public Rune(int value) {
 
         // Set the default attributes
-        super("Rune", '$', true);
+        super("Rune", '$', false);
 
         // Set the value
         this.value = value;
 
-        // Add the ConsumeAction
-        collectAction = new RuneCollectAction(this);
-        this.addAction(collectAction);
+        // Initialise the ConsumeAction
+        consumeAction = new ConsumeAction(this);
+        addAction(consumeAction);
 
         // Get the singleton instance of the RuneManager
         runeManager = RuneManager.getRuneManager();
@@ -54,17 +56,20 @@ public class Rune extends Item implements Collectable {
 
 
     /**
-     * When called the Rune value will be added to the player's runes balance
-     * @param collector The Actor class that will collect the item
+     * Called when the player uses the ConsumeAction.
+     * This will increase the Actor's runes by the value
+     * @param actor - The Actor class that will collect the item
      */
     @Override
-    public void collectedBy(Actor collector) {
+    public void consumedBy(Actor actor, GameMap map) {
+        // Remove the gah damn Item from the ground
+        map.locationOf(actor).removeItem(this);
 
         // The runes will be added to the collectors balance
-        runeManager.addRunes(collector, value);
+        runeManager.addRunes(actor, value);
 
         // Remove the action
-        this.removeAction(collectAction);
+        this.removeAction(consumeAction);
 
     }
 }

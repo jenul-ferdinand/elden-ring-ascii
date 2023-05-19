@@ -17,7 +17,7 @@ public class ConsumeAction extends Action {
     /**
      * Variable to store our consumable item
      */
-    private Consumable consumable;
+    private final Consumable consumable;
 
 
 
@@ -40,10 +40,7 @@ public class ConsumeAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         // Consume the item and pass the actor
-        consumable.consumedBy(actor);
-
-        // Remove the item from the location of the ground
-        map.locationOf(actor).removeItem((Item) consumable);
+        consumable.consumedBy(actor, map);
 
         // Return the confirmation message
         return actor + " consumes " + consumable;

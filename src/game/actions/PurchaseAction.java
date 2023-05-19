@@ -48,8 +48,8 @@ public class PurchaseAction extends Action {
 
 
     /**
-     * Constructor for item
-     * @param item - The item being sold
+     * Constructor for Item
+     * @param item - The Item being sold
      * @param cost - The cost of the item
      */
     public PurchaseAction(Item item, int cost) {
@@ -64,8 +64,8 @@ public class PurchaseAction extends Action {
     }
 
     /**
-     * Constructor for weapon
-     * @param weapon - The weapon being sold
+     * Constructor for WeaponItem
+     * @param weapon - The WeaponItem being sold
      * @param cost - The cost of the item
      */
     public PurchaseAction(WeaponItem weapon, int cost) {
