@@ -3,6 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
@@ -12,6 +13,8 @@ import game.enemies.HeavySkeletalSwordsman;
 import game.enemies.PileOfBones;
 import game.enemies.type.Skeletal;
 import game.items.Rune;
+import game.utils.FancyMessage;
+import game.utils.ResetManager;
 import game.utils.Status;
 
 /**
@@ -56,16 +59,16 @@ public class DeathAction extends Action {
             Location pileLocation = map.locationOf(target);
             map.removeActor(target);
             map.addActor(new PileOfBones(target), pileLocation);
-        }else if(attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            // drop all items
-            for (Item item : target.getItemInventory()){
-                dropActions.add(item.getDropAction(target));
-            }
+        }else if(attacker.hasCapability(Status.HOSTILE_TO_ENEMY) && target != attacker){
+
 //                if(!(item instanceof Rune)){
 //                    dropActions.add(item.getDropAction(target));
 //                } else if(attacker instanceof Player){
 
-
+// drop all items
+            for (Item item : target.getItemInventory()){
+                dropActions.add(item.getDropAction(target));
+            }
 
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
@@ -73,13 +76,16 @@ public class DeathAction extends Action {
                 drop.execute(target, map);
         }
 
-//        if(target.hasCapability(Status.HOSTILE_TO_ENEMY){
-//            //manage runes
-//        }
 
-        map.removeActor(target);
         result += System.lineSeparator() + menuDescription(target);
-        return result;
+        if(target.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            ResetManager reset = ResetManager.getInstance();
+            reset.run(map);
+        } else{
+            map.removeActor(target);
+            return result;
+        }
+        return null;
     }
 
 
@@ -91,6 +97,17 @@ public class DeathAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
+        if(actor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            // Display the YOU_DIED title card
+            for (String line : FancyMessage.YOU_DIED.split("\n")) {
+                new Display().println(line);
+                try {
+                    Thread.sleep(200);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        }
         return "💀 " + actor + " is killed.";
     }
 }

@@ -6,10 +6,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Ground;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.SellAction;
+import game.defaultGrounds.Floor;
 import game.items.Club;
 import game.items.FlaskOfCrimsonTears;
+import game.utils.ResetManager;
 import game.utils.Resettable;
 import game.utils.Status;
 
@@ -38,7 +41,8 @@ public class Player extends Actor implements Resettable {
 	public Player(String name, char displayChar, int hitPoints) {
 		// Super class attributes
 		super(name, displayChar, hitPoints);
-
+		ResetManager R = ResetManager.getInstance();
+		R.registerResettable(this);
 		// Starting location
 		this.startingX = 38;
 		this.startingY = 9;
@@ -92,8 +96,11 @@ public class Player extends Actor implements Resettable {
 	}
 
 	@Override
-	public void reset() {
-
+	public void reset(GameMap map) {
+		this.heal(99999);
+		//Location  l = new Location(map,this.getStartingX(),this.getStartingY()+1);
+		//l.setGround(new Floor());
+		map.moveActor(this, map.at(this.getStartingX(),this.getStartingY()));
 	}
 
 	/**

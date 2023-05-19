@@ -1,6 +1,6 @@
 package game.enemies.type;
 
-public class Stormveil extends Enemy{
+public abstract class Stormveil extends Enemy{
     /**
      * Constructor.
      *

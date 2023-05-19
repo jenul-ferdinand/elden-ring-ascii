@@ -42,8 +42,8 @@ public class Application {
 				"......................#............_#..............................+++.....",
 				"........<.............######...######......................................",
 				"...........................................................................",
-				"...................D.......................................................",
-				"........++++......................###___###................................",
+				"...........................................................................",
+				"........++++......................###+__###................................",
 				"........+++++++...................________#................................",
 				"..........+++.....................#________................................",
 				"............+++...................#_______#................................",
@@ -170,6 +170,7 @@ public class Application {
 		GameMap stormveilCastleMap = new GameMap(groundFactory, stormveilCastle);
 		GameMap roundtableHoldMap = new GameMap(groundFactory, roundtableHold);
 		GameMap bossRoomMap = new GameMap(groundFactory, bossRoom);
+
 		// Add the new map to the world
 		world.addGameMap(limgraveMap);
 		world.addGameMap(stormveilCastleMap);
@@ -186,14 +187,27 @@ public class Application {
 				exception.printStackTrace();
 			}
 		}
+		//limgraveMap
 		GoldenFogDoor goldenFogDoor1 = new GoldenFogDoor();
 		goldenFogDoor1.setLocation(roundtableHoldMap.at(5, 5));
 
 		GoldenFogDoor goldenFogDoor2 = new GoldenFogDoor();
 		goldenFogDoor2.setLocation(stormveilCastleMap.at(5, 5));
-		// Create Merchant Kale
+		//stormveilCastleMap
+		GoldenFogDoor goldenFogDoor3 = new GoldenFogDoor();
+		goldenFogDoor3.setLocation(limgraveMap.at(39, 10));
+
+		GoldenFogDoor goldenFogDoor4 = new GoldenFogDoor();
+		goldenFogDoor4.setLocation(bossRoomMap.at(5,5));
+		//roundtableHoldMap
+		GoldenFogDoor goldenFogDoor5 = new GoldenFogDoor();
+		goldenFogDoor5.setLocation(limgraveMap.at(37, 10));
+		// Create doors
 		limgraveMap.at(37, 10).setGround(goldenFogDoor1);
 		limgraveMap.at(39, 10).setGround(goldenFogDoor2);
+		stormveilCastleMap.at(5, 5).setGround(goldenFogDoor3);
+		stormveilCastleMap.at(5, 7).setGround(goldenFogDoor4);
+		roundtableHoldMap.at(5, 5).setGround(goldenFogDoor5);
 
 
 		// Create Merchant Kale

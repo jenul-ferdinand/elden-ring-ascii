@@ -10,7 +10,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actions.AttackAction;
+import game.actions.DeathAction;
+import game.actions.DespawnAction;
 import game.behaviour.*;
+import game.utils.ResetManager;
+import game.utils.Resettable;
 import game.utils.Status;
 
 import java.util.HashMap;
@@ -22,7 +26,7 @@ import java.util.Map;
  * Created by:Ruilin
  * Modified by: Ruilin
  */
-public abstract class Enemy extends Actor {
+public abstract class Enemy extends Actor implements Resettable {
     private int attackDamage;
     private int attackAccuracy;
 
@@ -39,6 +43,8 @@ public abstract class Enemy extends Actor {
      */
     public Enemy(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy) {
         super(name, displayChar, hitPoints);
+        ResetManager R = ResetManager.getInstance();
+        R.registerResettable(this);
         this.attackDamage = attackDamage;
         this.attackAccuracy = attackAccuracy;
         this.behaviours = new HashMap<>();
@@ -104,7 +110,6 @@ public abstract class Enemy extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-
         checkPlayerInRangeToFollow(map);
 
         for (Behaviour behaviour : behaviours.values()) {
@@ -165,4 +170,9 @@ public abstract class Enemy extends Actor {
         }
     }
 
+
+    @Override
+    public void reset(GameMap map) {
+        new DespawnAction(this);
+    }
 }

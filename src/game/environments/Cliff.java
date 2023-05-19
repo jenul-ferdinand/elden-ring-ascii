@@ -9,15 +9,16 @@ import edu.monash.fit2099.engine.displays.Display;
 
 public class Cliff extends Ground {
     /**
-     * Constructor.
-     *
+     * Constructor for the Cliff class.
      */
     public Cliff() {
         super('+');
     }
     /**
-     * Ground can also experience the joy of time.
-     * @param location The location of the Ground
+     * Executes the tick action for the Cliff ground.
+     * If there is an actor present on the location, it triggers a DeathAction on the actor.
+     *
+     * @param location The location of the Cliff ground.
      */
     @Override
     public void tick(Location location) {
@@ -25,16 +26,5 @@ public class Cliff extends Ground {
         if(location.containsAnActor()){
             display.println(new DeathAction(location.getActor()).execute(location.getActor(), location.map()));
         }
-    }
-
-    /**
-     * Override this to implement impassable terrain, or terrain that is only passable if conditions are met.
-     *
-     * @param actor the Actor to check
-     * @return true
-     */
-    @Override
-    public boolean canActorEnter(Actor actor) {
-        return true;
     }
 }
