@@ -15,7 +15,7 @@ import game.utils.Status;
  * @author Jenul Ferdinand
  * Modified by: Jenul Ferdinand
  */
-public class FlaskOfCrimsonTears extends Item implements Consumable {
+public class FlaskOfCrimsonTears extends Item implements Consumable, Enhanceable {
     /**
      * The capacity of the item
      */
@@ -24,7 +24,7 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
     /**
      * Stores the initial capacity
      */
-    private final int initialCapacity;
+    private int maxCapacity;
 
     /**
      * How much health we will gain once consumed
@@ -36,6 +36,10 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
      */
     private final Action consumeAction;
 
+    /**
+     * Refilled boolean to check stuff
+     */
+    private boolean refilled;
 
 
     /**
@@ -49,13 +53,19 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
         this.capacity = 2;
 
         // Set the initial capacity
-        this.initialCapacity = capacity;
+        this.maxCapacity = capacity;
 
         // The player will gain 250 HP once consumed
         this.healingPower = 250;
 
         // Initialise the ConsumeAction
         this.consumeAction = new ConsumeAction(this);
+
+        // Add FLASK capability
+        this.addCapability(Status.FLASK);
+
+        // Set refilled to false initially
+        this.refilled = false;
     }
 
 
@@ -68,9 +78,13 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        if (!hasCapability(Status.IN_INVENTORY)) {
-            this.addAction(consumeAction);
-            this.addCapability(Status.IN_INVENTORY);
+        // If the capacity is greater than or equal to zero and not refilled
+        if (capacity >= 0 && !refilled) {
+            // Add the consume action
+            addAction(consumeAction);
+
+            // Refilled
+            refilled = true;
         }
     }
 
@@ -82,35 +96,36 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
      */
     @Override
     public void consumedBy(Actor actor, GameMap map) {
-        // Remove item from ground, in case Actor consumes this Item while it's on the ground.
-        map.locationOf(actor).removeItem(this);
+        if (capacity > 0) {
+            // Remove item from ground, in case Actor consumes this Item while it's on the ground.
+            map.locationOf(actor).removeItem(this);
 
-        // Heal the player
-        actor.heal(healingPower);
+            // Heal the player
+            actor.heal(healingPower);
 
-        // Decrement the capacity
-        capacity--;
-
-        // If we have used up the capacity of the item
-        if (capacity <= 0) {
+            // Decrement the capacity
+            capacity--;
+        } else {
             // Remove the ability to consume this
             removeAction(consumeAction);
 
-            // Make portable so we can drop
-            togglePortability();
-
-            // Drop this item
-            getDropAction(actor);
-
-            // Make it non-portable again, so we can't pick it up
-            togglePortability();
+            // Not refilled
+            refilled = false;
         }
-
-
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (" + capacity + "/" + initialCapacity + ")";
+        return super.toString() + " (" + capacity + "/" + maxCapacity + ")";
+    }
+
+    @Override
+    public void enhance() {
+        // Set the max capacity to the initial max plus 2
+        int initialCapacity = maxCapacity;
+        maxCapacity = initialCapacity + 2;
+
+        // Set the capacity to the max
+        capacity = maxCapacity;
     }
 }

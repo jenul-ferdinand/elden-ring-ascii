@@ -91,6 +91,7 @@ public class Application {
 		gameMap.at(38, 15).addItem(new Rune(100));
 		gameMap.at(38, 16).addItem(new Rune(100));
 		gameMap.at(38,17).addItem(new GoldenRune());
+		gameMap.at(38, 18).addItem(new GoldenSeed());
 
 		// Weapons for testing
 		gameMap.at(36, 11).addItem(new Grossmesser());

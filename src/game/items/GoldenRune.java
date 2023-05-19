@@ -111,6 +111,14 @@ public class GoldenRune extends Item implements Consumable {
         // Remove the action
         this.removeAction(consumeAction);
 
+        // Drop the item
+        this.getDropAction(actor);
+
+        // Make non portable
+        this.togglePortability();
+
+        // Remove the item from the ground
+        map.locationOf(actor).removeItem(this);
     }
 
 

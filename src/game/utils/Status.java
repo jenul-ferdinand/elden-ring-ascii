@@ -11,4 +11,5 @@ public enum Status {
     RESTING,
     TRADE_CAPABLE,
     IN_INVENTORY,
+    FLASK,
 }
