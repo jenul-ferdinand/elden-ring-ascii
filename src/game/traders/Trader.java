@@ -113,17 +113,27 @@ public abstract class Trader extends Actor {
         // Check if the other actor has the capability to trade with us
         if(otherActor.hasCapability(Status.TRADE_CAPABLE)) {
             // ==== BUYING FROM ACTOR ====
+            // Loop through the actors Weapon inventory
             for (WeaponItem otherWeapon : otherActor.getWeaponInventory()) {
+                // Loop through our Weapons
                 for (WeaponItem weapon : weapons.keySet()) {
+                    // Check if the actor's Weapon and our Weapon are the same
                     if (weapon.toString() == otherWeapon.toString()) {
+
+                        // Add the sell action for the current Weapon
                         actions.add(new SellAction(otherWeapon, getWeaponBuyingPrice(weapon), this));
                     }
                 }
             }
 
-            for (Item otherItem : otherActor.getWeaponInventory()) {
+            // Loop through the actors Item inventory
+            for (Item otherItem : otherActor.getItemInventory()) {
+                // Loop through our Items
                 for (Item item : items.keySet()) {
-                    if (item.toString() == otherItem.toString()) {
+                    // Check if the actor's Item and our Item are the same
+                    if (item.getDisplayChar() == otherItem.getDisplayChar()) {
+
+                        // Add the sell action for the current Item
                         actions.add(new SellAction(otherItem, getItemBuyingPrice(item), this));
                     }
                 }
@@ -146,8 +156,10 @@ public abstract class Trader extends Actor {
         // Create a new list of actions
         ActionList actions = new ActionList();
 
+        // Selling to actor functionality
         sellingToActor(otherActor, actions);
 
+        // Buying from actor functionality
         buyingFromActor(otherActor, actions);
 
         // Return the action list

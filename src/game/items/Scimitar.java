@@ -9,9 +9,6 @@ import game.actions.AttackAction;
 import game.utils.Status;
 
 public class Scimitar extends WeaponItem {
-
-
-
     /**
      * Constructor
      */

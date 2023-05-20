@@ -10,7 +10,6 @@ import edu.monash.fit2099.engine.positions.World;
 import game.defaultGrounds.Dirt;
 import game.defaultGrounds.Floor;
 import game.defaultGrounds.Wall;
-import game.enemies.GiantCrab;
 import game.environments.Graveyard;
 import game.environments.GustOfWind;
 import game.environments.PuddleOfWater;
@@ -25,9 +24,9 @@ import game.utils.FancyMessage;
 
 /**
  * The main class to start the game.
- * Created by:
+ * Created by: Adrian Kristanto
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Jenul Ferdinand & Ruilin
  *
  */
 public class Application {

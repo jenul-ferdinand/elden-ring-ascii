@@ -13,9 +13,6 @@ import edu.monash.fit2099.engine.positions.Location;
  * Modified by: Jenul Ferdinand
  */
 public class RemembranceOfTheGrafted extends Item {
-
-
-
     /**
      * Constructor.
      */

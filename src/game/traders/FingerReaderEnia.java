@@ -38,6 +38,10 @@ public class FingerReaderEnia extends Trader {
         initWeapon(new Club(),          0, 40, DealType.BUYING);
         initWeapon(new Grossmesser(),   0, 70, DealType.BUYING);
         initWeapon(new Scimitar(),      0, 70, DealType.BUYING);
+
+        // Items
+        initItem(new GoldenSeed(), 0, 7500, DealType.BUYING);
+        initItem(new RemembranceOfTheGrafted(), 0, 20000, DealType.BUYING);
     }
 
 

@@ -21,8 +21,7 @@ import game.utils.Status;
  * It carries around a club to attack a hostile creature in the Lands Between.
  * Created by: Adrian Kristanto
  * @author Adrian Kristanto
- * Modified by: Jenul Ferdinand
- *
+ * Modified by: Jenul Ferdinand & Ruilin
  */
 public class Player extends Actor implements Resettable {
 	/**
@@ -116,7 +115,9 @@ public class Player extends Actor implements Resettable {
 
 
 	/**
-	 * Game reset handling
+	 * Game reset handling.
+	 * The Player will heal to max health, the runes will be dropped and the Player will teleport back to
+	 * the starting location.
 	 */
 	@Override
 	public void reset(GameMap map) {

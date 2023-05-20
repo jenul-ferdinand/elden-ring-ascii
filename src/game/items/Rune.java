@@ -31,6 +31,7 @@ public class Rune extends Item implements Consumable {
     private final RuneManager runeManager;
 
 
+
     /**
      * Constructor.
      *
@@ -53,6 +54,7 @@ public class Rune extends Item implements Consumable {
     }
 
 
+
     /**
      * Actor should not be able to pick up runes, only consume them.
      * @param actor - The actor
@@ -62,6 +64,7 @@ public class Rune extends Item implements Consumable {
     public PickUpAction getPickUpAction(Actor actor) {
         return null;
     }
+
 
 
     /**
@@ -81,4 +84,7 @@ public class Rune extends Item implements Consumable {
         this.removeAction(consumeAction);
 
     }
+
+
+
 }

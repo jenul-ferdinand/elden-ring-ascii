@@ -3,17 +3,9 @@ package game.traders;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actions.PurchaseAction;
-import game.actions.SellAction;
-import game.items.Club;
-import game.items.Grossmesser;
-import game.items.Scimitar;
-import game.utils.Status;
-
+import game.items.*;
 
 
 /**
@@ -38,6 +30,12 @@ public class MerchantKale extends Trader {
         initWeapon(new Club(),          600,    100,    DealType.BOTH);
         initWeapon(new Scimitar(),      600,    100,    DealType.BOTH);
         initWeapon(new Grossmesser(),   0,      100,    DealType.BUYING);
+        initWeapon(new AxeOfGodrick(), 0, 1000, DealType.BUYING);
+        initWeapon(new GraftedDragon(), 0, 1000, DealType.BUYING);
+
+        // Items
+        initItem(new GoldenSeed(), 0, 500, DealType.BUYING);
+        initItem(new RemembranceOfTheGrafted(), 0, 20000, DealType.BUYING);
     }
 
 
