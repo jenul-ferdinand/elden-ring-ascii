@@ -3,10 +3,9 @@ package game.items;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
-import game.utils.Status;
 
 
 /**
@@ -39,7 +38,7 @@ public class Rune extends Item implements Consumable {
     public Rune(int value) {
 
         // Set the default attributes
-        super("Rune", '$', false);
+        super("Rune", '$', true);
 
         // Set the value
         this.value = value;
@@ -53,6 +52,16 @@ public class Rune extends Item implements Consumable {
 
     }
 
+
+    /**
+     * Actor should not be able to pick up runes, only consume them.
+     * @param actor - The actor
+     * @return null
+     */
+    @Override
+    public PickUpAction getPickUpAction(Actor actor) {
+        return null;
+    }
 
 
     /**

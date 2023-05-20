@@ -171,8 +171,14 @@ public abstract class Enemy extends Actor implements Resettable {
     }
 
 
+
+    /**
+     * Despawn the enemy when the player dies
+     * @param map - The GameMap
+     */
     @Override
     public void reset(GameMap map) {
-        new DespawnAction(this);
+        Action a = new DespawnAction(this);
+        a.execute(this, map);
     }
 }

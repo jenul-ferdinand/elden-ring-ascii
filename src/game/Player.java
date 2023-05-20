@@ -6,9 +6,11 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.Club;
 import game.items.FlaskOfCrimsonTears;
+import game.items.Rune;
 import game.items.RuneManager;
 import game.utils.ResetManager;
 import game.utils.Resettable;
@@ -31,7 +33,12 @@ public class Player extends Actor implements Resettable {
 	/**
 	 * To store the singleton instance of the RuneManager
 	 */
-	private RuneManager runeManager;
+	private final RuneManager runeManager;
+
+	/**
+	 * This will store the player's last location
+	 */
+	private Location lastLocation;
 
 
 
@@ -60,6 +67,9 @@ public class Player extends Actor implements Resettable {
 		// Add the Flask of Crimson Tears to the inventory
 		this.addItemToInventory(new FlaskOfCrimsonTears());
 
+		// Initialise the last location as null
+		this.lastLocation = null;
+
 		// RuneManager initialisation
 		this.runeManager = RuneManager.getRuneManager();
 		// Set the initial runes to zero
@@ -78,6 +88,12 @@ public class Player extends Actor implements Resettable {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		// If last location is not the same as the current location
+		if (lastLocation != map.locationOf(this)) {
+			// Set the last location to the current location
+			this.lastLocation = map.locationOf(this);
+		}
+
 		// Colours as variables
 		final String ANSI_RESET = "\u001B[0m";
 		final String ANSI_RED = "\u001B[31m";
@@ -104,8 +120,19 @@ public class Player extends Actor implements Resettable {
 	 */
 	@Override
 	public void reset(GameMap map) {
+		// Heal the player to max health
 		this.heal(99999);
 
+		// If the player's runes is greater than 0
+		if (runeManager.getRunes(this) > 0) {
+			// Drop a Rune with value of the player's rune balance at the last location
+			map.at(lastLocation.x(), lastLocation.y()).addItem(new Rune(runeManager.getRunes(this)));
+		}
+
+		// Remove the runes from the player
+		runeManager.setRunes(this, 0);
+
+		// Move the player back to the starting location
 		map.moveActor(this, map.at(38, 9));
 	}
 

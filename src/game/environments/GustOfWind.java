@@ -12,7 +12,7 @@ import game.utils.RandomNumberGenerator;
 
 public class GustOfWind extends Ground {
     int spawnChanceWolf = 33;
-    int spawnChanceDog = 4;
+    int spawnChanceDog = 33;
     public GustOfWind() {
         super('&');
     }
@@ -23,9 +23,11 @@ public class GustOfWind extends Ground {
         if(location.containsAnActor()){
             return;
         } else if (RandomNumberGenerator.getRandomInt(100) < spawnChanceWolf &&
+                // If location is east side of the map
                 (location.x() < (location.map().getXRange().max() / 2))) {
                 location.addActor(new LoneWolf());
         } else if (RandomNumberGenerator.getRandomInt(100) < spawnChanceDog &&
+                // If location is west side of the map
                 !(location.x() < (location.map().getXRange().max() / 2))) {
             location.addActor(new GiantDog());
         }
