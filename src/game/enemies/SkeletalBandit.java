@@ -7,9 +7,9 @@ import game.utils.RandomNumberGenerator;
 
 public class SkeletalBandit extends Skeletal {
     public SkeletalBandit() {
-        super("Skeletal Bandit", 'b', 153,0,0, null);
+        super("Skeletal Bandit", 'b', 153,0,0);
 
-        // Add Scimitar to inventory
+        // Add the Scimitar to inventory
         this.addWeaponToInventory(new Scimitar());
 
         // Add Rune to inventory

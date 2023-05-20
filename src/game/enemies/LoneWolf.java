@@ -21,7 +21,7 @@ public class LoneWolf extends Land {
      * Constructor
      */
     public LoneWolf() {
-        super("Lone Wolf", 'h', 102,97,95, null);
+        super("Lone Wolf", 'h', 102,97,95);
     }
 
     /**

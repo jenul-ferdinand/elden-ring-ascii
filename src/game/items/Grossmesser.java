@@ -2,16 +2,10 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actions.AttackAction;
-import game.utils.Status;
+import game.actions.AttackAOEAction;
 
 public class Grossmesser extends WeaponItem {
-
-
-
     /**
      * Constructor
      */
@@ -21,12 +15,6 @@ public class Grossmesser extends WeaponItem {
 
     @Override
     public Action getSkill(Actor target, String direction) {
-        return new AttackAction(target, "surrounding", this);
+        return new AttackAOEAction(target, this);
     }
-
-    @Override
-    public void tick(Location currentLocation, Actor actor) {}
-
-
-
 }

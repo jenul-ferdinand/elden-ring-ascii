@@ -9,9 +9,8 @@ public abstract class Land extends Enemy {
      * @param hitPoints      the Actor's starting hit points
      * @param attackDamage
      * @param attackAccuracy
-     * @param specialSkill
      */
-    public Land(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy, String specialSkill) {
-        super(name, displayChar, hitPoints, attackDamage, attackAccuracy, specialSkill);
+    public Land(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy) {
+        super(name, displayChar, hitPoints, attackDamage, attackAccuracy);
     }
 }

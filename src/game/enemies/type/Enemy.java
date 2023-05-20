@@ -10,7 +10,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actions.AttackAction;
+import game.actions.DeathAction;
+import game.actions.DespawnAction;
 import game.behaviour.*;
+import game.utils.ResetManager;
+import game.utils.Resettable;
 import game.utils.Status;
 
 import java.util.HashMap;
@@ -22,11 +26,9 @@ import java.util.Map;
  * Created by:Ruilin
  * Modified by: Ruilin
  */
-public abstract class Enemy extends Actor {
+public abstract class Enemy extends Actor implements Resettable {
     private int attackDamage;
     private int attackAccuracy;
-
-    private String specialSkill;
 
     protected Map<Integer, Behaviour> behaviours;
 
@@ -38,15 +40,16 @@ public abstract class Enemy extends Actor {
      * @param hitPoints      the Actor's starting hit points
      * @param attackDamage
      * @param attackAccuracy
-     * @param specialSkill
      */
-    public Enemy(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy, String specialSkill) {
+    public Enemy(String name, char displayChar, int hitPoints, int attackDamage, int attackAccuracy) {
         super(name, displayChar, hitPoints);
+        ResetManager R = ResetManager.getInstance();
+        R.registerResettable(this);
         this.attackDamage = attackDamage;
         this.attackAccuracy = attackAccuracy;
-        this.specialSkill = specialSkill;
         this.behaviours = new HashMap<>();
-        this.behaviours.put(996, new DespawnBehaviour());
+        this.behaviours.put(995, new DespawnBehaviour());
+        this.behaviours.put(996, new AttackAOEBehaviour());
         this.behaviours.put(997, new AttackBehaviour());
         this.behaviours.put(999, new WanderBehaviour());
     }
@@ -107,7 +110,6 @@ public abstract class Enemy extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-
         checkPlayerInRangeToFollow(map);
 
         for (Behaviour behaviour : behaviours.values()) {
@@ -168,11 +170,9 @@ public abstract class Enemy extends Actor {
         }
     }
 
-    public String getSpecialSkill() {
-        return specialSkill;
-    }
 
-    public void setSpecialSkill(String specialSkill) {
-        this.specialSkill = specialSkill;
+    @Override
+    public void reset(GameMap map) {
+        new DespawnAction(this);
     }
 }

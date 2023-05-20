@@ -2,6 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
@@ -9,6 +10,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.Club;
 import game.items.FlaskOfCrimsonTears;
 import game.items.RuneManager;
+import game.utils.ResetManager;
 import game.utils.Resettable;
 import game.utils.Status;
 
@@ -20,10 +22,7 @@ import game.utils.Status;
  * Modified by: Jenul Ferdinand
  *
  */
-public class Player extends edu.monash.fit2099.engine.actors.Actor implements Resettable {
-
-
-
+public class Player extends Actor implements Resettable {
 	/**
 	 * Create and store an instance of the menu
 	 */
@@ -47,6 +46,10 @@ public class Player extends edu.monash.fit2099.engine.actors.Actor implements Re
 		super(name, displayChar, hitPoints);
 
 		// Hostile to enemies
+		ResetManager R = ResetManager.getInstance();
+		R.registerResettable(this);
+
+		// Capability that the player is hostile to enemies
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		// Can trade with traders
 		this.addCapability(Status.TRADE_CAPABLE);
@@ -100,8 +103,10 @@ public class Player extends edu.monash.fit2099.engine.actors.Actor implements Re
 	 * Game reset handling
 	 */
 	@Override
-	public void reset() {
+	public void reset(GameMap map) {
+		this.heal(99999);
 
+		map.moveActor(this, map.at(38, 9));
 	}
 
 
