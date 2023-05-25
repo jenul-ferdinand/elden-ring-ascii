@@ -1,10 +1,6 @@
-# FIT2099 Assignment (Semester 1, 2023)
-# Elden Ring
-
-## CL_Lab18Team01
+# FIT2099 Assignment (Semester 1, 2023) (Elden Ring ASCII Game)
 Team members: Ruilin Lu, Jenul Ferdinand
 
-## Design Rationale
+For this Assignment our team was tasked with implementing various features based on the game Elden Ring. We were allowed to use functions from the provided game engine but we were not allowed to alter it. 
 
-## FIT2099 - CL_Lab18Team1 - Assignments' Contribution Logs 
-https://docs.google.com/spreadsheets/d/13txXeLeSH2Qgzh5MqyaUUjKc1hwteJLN8wq04_JahTg/edit?usp=sharing
+Monash University owns rights to the ``edu.monash.fit2099.engine`` package in this project.
